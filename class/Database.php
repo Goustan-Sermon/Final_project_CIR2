@@ -1,5 +1,10 @@
 <?php
+// Enable all warnings and errors.
+// ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+
 include_once('config.php');
+
 
 class Db
 {
@@ -11,6 +16,7 @@ class Db
 
         try {
             $db = new PDO('pgsql:host='.DB_SERVER.';port='.DB_PORT.';dbname='.DB_NAME, DB_USER, DB_PASSWORD);
+            echo DB_USER;
         }
         catch (PDOException $exception) {
             //die('Connection error: '.$exception->getMessage());
@@ -21,3 +27,8 @@ class Db
         return $db;
     }
 }
+
+// $dbh = Db::connexionBD();
+// $statement = $dbh->query('SELECT * FROM public.user');
+// $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+// print_r($result);
