@@ -84,17 +84,6 @@ body {
     background-color: #101010;
     padding: 14px 30px;
 }
-.topbar .prev-next-buttons button {
-    color: #7a7a7a;
-    cursor: not-allowed;
-    width: 34px;
-    height: 34px;
-    border-radius: 100%;
-    font-size: 18px;
-    border: 0px;
-    background-color: #090909;
-    margin-right: 10px;
-}
 .topbar .navbar {
     display: flex;
     align-items: center;
@@ -250,16 +239,16 @@ body {
     position: relative;
 }
 .input-search{
-    height: 50px;
-    width: 50px;
+    height: 35px;
+    width: 300px;
     border-style: none;
-    padding: 10px;
+    padding: 7px;
     font-size: 18px;
     letter-spacing: 2px;
     outline: none;
     border-radius: 25px;
     transition: all .5s ease-in-out;
-    background-color: #22a6b3;
+    background-color: #353333;
     padding-right: 40px;
     color:#fff;
 }
@@ -280,7 +269,7 @@ body {
     border-radius: 50%;
     position: absolute;
     right: 0px;
-    color:#ffffff ;
+    color:rgba(255,255,255,.5) ;
     background-color:transparent;
     pointer-events: painted;
 }
