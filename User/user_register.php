@@ -1,6 +1,6 @@
 <?php
 ob_start();
-require_once ("../model/User.php");
+require_once ("../class/User.php");
 $error=User::register();
 ?>
 
@@ -71,5 +71,5 @@ $error=User::register();
     </section>
 
 <?php
-$content2 = ob_get_clean();
-require_once('template2.php');
+$content_register = ob_get_clean();
+require_once('template_register.php');

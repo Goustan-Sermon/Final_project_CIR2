@@ -21,8 +21,7 @@ class User
         if (!isset($_SESSION['id_user']) && $fileName != 'index.php') {    //deco
             header('Location: ../User/index.php');
         }
-        echo $_POST['email'];
-        echo $_POST['password'];
+
         if (!empty($_POST['email']) && !empty($_POST['password'])) {
             try {
                 $dbh = Db::connexionBD();
@@ -30,7 +29,7 @@ class User
                 $statement->bindParam(':email', $_POST['email']);
                 $statement->execute();
                 $result = $statement->fetch(PDO::FETCH_ASSOC);
-                print_r($result);
+
 
             } catch (PDOException $exception) {
                 error_log('Connection error: '.$exception->getMessage());

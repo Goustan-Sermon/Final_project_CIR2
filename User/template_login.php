@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title>Trouvago</title>
+    <title>Spotifiak</title>
 
     <link rel="stylesheet" type="text/css" href="../css/client.css">
 
@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<?php echo $content;?>
+<?php echo $content_login;?>
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

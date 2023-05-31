@@ -1,6 +1,6 @@
 <?php
 ob_start();
-require_once ("../model/User.php");
+require_once ("../class/User.php");
 $user_id=User::Login();
 echo $user_id;
 ?>
@@ -35,5 +35,5 @@ echo $user_id;
     </section>
 
 <?php
-$content = ob_get_clean();
-require_once('template.php');
+$content_login = ob_get_clean();
+require_once('template_login.php');
