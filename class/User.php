@@ -28,7 +28,7 @@ class User
         if (!empty($_POST['email']) && !empty($_POST['password'])) {
             try {
                 $dbh = Db::connexionBD();
-                $statement = $dbh->prepare('SELECT id_user, mdp FROM public.user WHERE email=:email');
+                $statement = $dbh->prepare('SELECT id_user, mdp FROM public.Utilisateur WHERE email=:email');
                 $statement->bindParam(':email', $_POST['email']);
                 $statement->execute();
                 $result = $statement->fetch(PDO::FETCH_ASSOC);
@@ -84,7 +84,7 @@ class User
             try {
                 $dbh = Db::connexionBD();
 
-                $statement = $dbh->prepare("SELECT email FROM public.User
+                $statement = $dbh->prepare("SELECT email FROM public.Utilisateur
                                                 WHERE email=:email");
                 $statement->bindParam(':email', $_POST['emailAddress']);
                 $statement->execute();
@@ -99,7 +99,7 @@ class User
             }
 
             try {
-                $statement = $dbh->prepare("INSERT INTO public.User(nom, prenom, email, mdp,date_naissance) 
+                $statement = $dbh->prepare("INSERT INTO public.Utilisateur(nom, prenom, email, mdp,date_naissance) 
                                                 VALUES (:nom, :prenom, :email, :mdp,:age)");
 
                 $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
@@ -128,7 +128,7 @@ class User
     {
         try {
             $dbh = Db::connexionBD();
-            $statement = $dbh->prepare('SELECT * from public.User WHERE id_user=:id');
+            $statement = $dbh->prepare('SELECT * from public.Utilisateur WHERE id_user=:id');
             $statement->bindParam(':id', $user_id);
             $statement->execute();
             return $statement->fetch(PDO::FETCH_ASSOC);
@@ -144,7 +144,7 @@ class User
             {
                 $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
                 $dbh=Db::connexionBD();
-                $request = 'UPDATE public.user SET nom=:nom , prenom=:prenom,mdp=:mdp,email=:email WHERE id_user=:id';
+                $request = 'UPDATE public.Utilisateur SET nom=:nom , prenom=:prenom,mdp=:mdp,email=:email WHERE id_user=:id';
                 $statement = $dbh->prepare($request);
                 $statement->bindParam(':id', $id, PDO::PARAM_INT);
                 $statement->bindParam(':nom', $nom, PDO::PARAM_STR,50);
