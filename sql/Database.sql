@@ -2,11 +2,6 @@
 --        Script Postgre
 ------------------------------------------------------------
 
-
-
-------------------------------------------------------------
--- Table: User
-------------------------------------------------------------
 DROP TABLE IF EXISTS public.User CASCADE;
 DROP TABLE IF EXISTS public.Playlist CASCADE;
 DROP TABLE IF EXISTS public.Types_Artistes CASCADE;
@@ -16,14 +11,19 @@ DROP TABLE IF EXISTS public.Album CASCADE;
 DROP TABLE IF EXISTS public.Morceau CASCADE;
 DROP TABLE IF EXISTS public.Morceau_Playlist CASCADE;
 DROP TABLE IF EXISTS public.Morceau_Artiste CASCADE;
+
+------------------------------------------------------------
+-- Table: User
+------------------------------------------------------------
+
 CREATE TABLE public.User(
-                            id_user         SERIAL NOT NULL ,
-                            nom             VARCHAR (50) NOT NULL ,
-                            prenom          VARCHAR (50) NOT NULL ,
-                            email           VARCHAR (150) NOT NULL ,
-                            mdp             VARCHAR (256) NOT NULL ,
-                            age             INT  NOT NULL ,
-                            photo_profile   VARCHAR (150),
+                            id_user          SERIAL NOT NULL ,
+                            nom              VARCHAR (50) NOT NULL ,
+                            prenom           VARCHAR (50) NOT NULL ,
+                            email            VARCHAR (150) NOT NULL ,
+                            mdp              VARCHAR (256) NOT NULL ,
+                            date_naissance   DATE  NOT NULL ,
+                            photo_profile    VARCHAR (150)   ,
                             CONSTRAINT User_PK PRIMARY KEY (id_user)
 )WITHOUT OIDS;
 
