@@ -2,9 +2,9 @@
 ob_start();
 require_once ("../class/User.php");
 $user_id=User::Login();
-echo $user_id;
 
-echo '<a href="user_logout.php">Log out</a>';
+
+
 
 ?>
 
@@ -71,27 +71,15 @@ echo '<a href="user_logout.php">Log out</a>';
         <div class="prev-next-buttons">
             <div class="search-box">
                 <button class="btn-search"><ion-icon name="search-outline"></ion-icon></button>
-                <input type="text" class="input-search" placeholder="Type to Search...">
+                <label>
+                    <input type="text" class="input-search" placeholder="Type to Search...">
+                </label>
             </div>
         </div>
 
         <div class="navbar">
-            <ul>
-                <li>
-                    <a href="#">Premium</a>
-                </li>
-                <li>
-                    <a href="#">Support</a>
-                </li>
-                <li>
-                    <a href="#">Download</a>
-                </li>
-                <li class="divider">|</li>
-                <li>
-                    <a href="#">Sign Up</a>
-                </li>
-            </ul>
-            <button type="button"><a style="text-decoration: none;color=#000000;" href="user_logout.php">Log out</a></button>
+
+            <button type="button"><a style="text-decoration: none;color=inherit;" href="user_logout.php">Log out</a></button>
         </div>
     </div>
 
@@ -102,7 +90,7 @@ echo '<a href="user_logout.php">Log out</a>';
             <div class="item">
                 <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
                 <div class="play">
-                    <span class="fa fa-play"></span>
+                    <span class="fa fa-play"><ion-icon style="padding-left: 2px;padding-top: 2px; font-size: 15px" name="play-outline"></ion-icon></span>
                 </div>
                 <h4>Today's Top Hits</h4>
                 <p>Rema & Selena Gomez are on top of the...</p>
