@@ -42,7 +42,7 @@ class User
                 header('Location: ../User/user_home.php');
             }
             else{
-                return "Mot de passe ou email incorrecte !";
+                return "Password or email incorrect !";
             }
             return $_SESSION['id_user'];
         }
@@ -57,10 +57,10 @@ class User
                 return 'Fill the first name field !';
             }
             if (empty($_POST['lastName'])) {
-                return 'Fille the last name field !';
+                return 'Fill the last name field !';
             }
             if (empty($_POST['emailAddress'])) {
-                return 'Fille the email address field !';
+                return 'Fill the email address field !';
             }
             if (!filter_var($_POST['emailAddress'], FILTER_VALIDATE_EMAIL)) {
                 return 'Email address is invalid !';
