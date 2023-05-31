@@ -11,7 +11,7 @@ $info=User::get_info_client($user_id);
 
     <div class="sidebar">
         <div class="logo">
-            <a href="#">
+            <a href="user_home.php">
                 <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png" alt="Logo" />
             </a>
         </div>
@@ -67,29 +67,7 @@ $info=User::get_info_client($user_id);
 
     <div class="main-container" style="color:white;">
 
-        <form action="#" method="get" style="color:white">
-            <label for="nom">Nom :</label>
-            <input type="text" id="nom" name="nom" disabled value="<?php echo $info['nom']?>"<br>
 
-            <label for="prenom">Prénom :</label>
-            <input type="text" id="prenom" name="prenom" disabled value="<?php echo $info['prenom']?>"><br>
-
-            <label for="age">Âge :</label>
-            <input type="number" id="age" name="age" disabled value="<?php echo $info['age']?>"><br>
-
-            <label for="email">Email :</label>
-            <input type="email" id="email" name="email" disabled value="<?php echo $info['email']?>"><br>
-
-            <label for="password">Mot de passe :</label>
-            <input type="password" id="password" name="password" disabled value="aaaaaaaaa"><br>
-
-            <button type="submit" name= "modify" id="id_user" value=<?php echo $info['id_user']?>>Modify</button>
-
-
-        </form>
-
-        <div id="form_update"></div>
-    </div>
 
 
 
