@@ -2,10 +2,6 @@
 ob_start();
 require_once ("../class/User.php");
 $user_id=User::Login();
-
-
-
-
 ?>
 
 <body>
@@ -20,9 +16,9 @@ $user_id=User::Login();
     <div class="navigation">
         <ul>
             <li>
-                <a href="#">
+                <a href="user_account.php">
                     <span class="fa fa-home"></span>
-                    <span>Home</span>
+                    <span>Your account</span>
                 </a>
             </li>
 

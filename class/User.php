@@ -6,6 +6,8 @@ require_once('Database.php');
 
 class User
 {
+
+
     static function Login()
     {
 
@@ -129,11 +131,38 @@ class User
             $statement = $dbh->prepare('SELECT * from public.User WHERE id_user=:id');
             $statement->bindParam(':id', $user_id);
             $statement->execute();
-            return $statement->fetch();
+            return $statement->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $exception) {
             error_log('Connection error: ' . $exception->getMessage());
             return false;
         }
     }
 
+    static function update_info($db, $id, $prenom, $nom,$mdp,$email)
+        {
+            try
+            {
+                $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+                $dbh=Db::connexionBD();
+                $request = 'UPDATE public.user SET nom=:nom , prenom=:prenom,mdp=:mdp,email=:email WHERE id_user=:id';
+                $statement = $dbh->prepare($request);
+                $statement->bindParam(':id', $id, PDO::PARAM_INT);
+                $statement->bindParam(':nom', $nom, PDO::PARAM_STR,50);
+                $statement->bindParam(':prenom', $prenom, PDO::PARAM_STR, 50);
+                $statement->bindParam(':mdp', $password, PDO::PARAM_STR, 255);
+                $statement->bindParam(':email', $prenom, PDO::PARAM_STR, 80);
+                $statement->execute();
+            }
+            catch (PDOException $exception)
+            {
+                error_log('Request error: '.$exception->getMessage());
+                return false;
+            }
+            return true;
+        }
+
+}
+
+function print_array($tab){
+    print('<pre>'.print_r($tab,true).'</pre>');
 }
