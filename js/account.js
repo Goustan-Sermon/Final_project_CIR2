@@ -28,10 +28,17 @@ function update_form(info){
             '            <label for="password">Mot de passe :</label>\n' +
             '            <input type="password" id="password" name="password" value="aaaaaaaaa"><br>\n' +
             '\n' +
-            '            <button type="submit" name= "save" id="id_user" value="'+info['id_user']+'">Save</button>\n' +
+            '            <button type="submit" name= "save" id="save" value="'+info['id_user']+'">Save</button>\n' +
             '\n' +
             '\n' +
             '        </form>')
+
+    $('#save').click(function (event){
+
+    let id=document.getElementById('save').value
+    console.log(id)
+    if( id!==undefined
+    })
 
 
 
