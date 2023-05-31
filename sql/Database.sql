@@ -7,10 +7,20 @@
 ------------------------------------------------------------
 -- Table: User
 ------------------------------------------------------------
+DROP TABLE IF EXISTS public.User CASCADE;
+DROP TABLE IF EXISTS public.Playlist CASCADE;
+DROP TABLE IF EXISTS public.Types_Artistes CASCADE;
+DROP TABLE IF EXISTS public.Artiste CASCADE;
+DROP TABLE IF EXISTS public.Styles_Musicaux CASCADE;
+DROP TABLE IF EXISTS public.Album CASCADE;
+DROP TABLE IF EXISTS public.Morceau CASCADE;
+DROP TABLE IF EXISTS public.Morceau_Playlist CASCADE;
+DROP TABLE IF EXISTS public.Morceau_Artiste CASCADE;
 CREATE TABLE public.User(
                             id_user         SERIAL NOT NULL ,
                             nom             VARCHAR (50) NOT NULL ,
                             prenom          VARCHAR (50) NOT NULL ,
+                            email           VARCHAR (150) NOT NULL ,
                             mdp             VARCHAR (256) NOT NULL ,
                             age             INT  NOT NULL ,
                             photo_profile   VARCHAR (150) NOT NULL  ,
@@ -37,8 +47,9 @@ CREATE TABLE public.Playlist(
 -- Table: Types_Artistes
 ------------------------------------------------------------
 CREATE TABLE public.Types_Artistes(
+                                      id_type        SERIAL NOT NULL ,
                                       type_artiste   VARCHAR (50) NOT NULL  ,
-                                      CONSTRAINT Types_Artistes_PK PRIMARY KEY (type_artiste)
+                                      CONSTRAINT Types_Artistes_PK PRIMARY KEY (id_type)
 )WITHOUT OIDS;
 
 
@@ -46,13 +57,12 @@ CREATE TABLE public.Types_Artistes(
 -- Table: Artiste
 ------------------------------------------------------------
 CREATE TABLE public.Artiste(
-                               id_artiste                    SERIAL NOT NULL ,
-                               nom_artiste                   VARCHAR (50) NOT NULL ,
-                               type_artiste                  VARCHAR (50) NOT NULL ,
-                               type_artiste_Types_Artistes   VARCHAR (50) NOT NULL  ,
+                               id_artiste    SERIAL NOT NULL ,
+                               nom_artiste   VARCHAR (50) NOT NULL ,
+                               id_type       INT  NOT NULL  ,
                                CONSTRAINT Artiste_PK PRIMARY KEY (id_artiste)
 
-    ,CONSTRAINT Artiste_Types_Artistes_FK FOREIGN KEY (type_artiste_Types_Artistes) REFERENCES public.Types_Artistes(type_artiste)
+    ,CONSTRAINT Artiste_Types_Artistes_FK FOREIGN KEY (id_type) REFERENCES public.Types_Artistes(id_type)
 )WITHOUT OIDS;
 
 
@@ -60,8 +70,9 @@ CREATE TABLE public.Artiste(
 -- Table: Styles_Musicaux
 ------------------------------------------------------------
 CREATE TABLE public.Styles_Musicaux(
-                                       style   VARCHAR (50) NOT NULL  ,
-                                       CONSTRAINT Styles_Musicaux_PK PRIMARY KEY (style)
+                                       id_style   SERIAL NOT NULL ,
+                                       style      VARCHAR (50) NOT NULL  ,
+                                       CONSTRAINT Styles_Musicaux_PK PRIMARY KEY (id_style)
 )WITHOUT OIDS;
 
 
@@ -69,17 +80,16 @@ CREATE TABLE public.Styles_Musicaux(
 -- Table: Album
 ------------------------------------------------------------
 CREATE TABLE public.Album(
-                             id_album                SERIAL NOT NULL ,
-                             titre_album             VARCHAR (50) NOT NULL ,
-                             date_parution           DATE  NOT NULL ,
-                             style                   VARCHAR (50) NOT NULL ,
-                             image_album             VARCHAR (150) NOT NULL ,
-                             id_artiste              INT  NOT NULL ,
-                             style_Styles_Musicaux   VARCHAR (50) NOT NULL  ,
+                             id_album        SERIAL NOT NULL ,
+                             titre_album     VARCHAR (50) NOT NULL ,
+                             date_parution   DATE  NOT NULL ,
+                             image_album     VARCHAR (150) NOT NULL ,
+                             id_artiste      INT  NOT NULL ,
+                             id_style        INT  NOT NULL  ,
                              CONSTRAINT Album_PK PRIMARY KEY (id_album)
 
     ,CONSTRAINT Album_Artiste_FK FOREIGN KEY (id_artiste) REFERENCES public.Artiste(id_artiste)
-    ,CONSTRAINT Album_Styles_Musicaux0_FK FOREIGN KEY (style_Styles_Musicaux) REFERENCES public.Styles_Musicaux(style)
+    ,CONSTRAINT Album_Styles_Musicaux0_FK FOREIGN KEY (id_style) REFERENCES public.Styles_Musicaux(id_style)
 )WITHOUT OIDS;
 
 
