@@ -9,6 +9,7 @@ class User
     static function Login()
     {
 
+
         $fileName = explode('/', $_SERVER['PHP_SELF']);
         $fileName = end($fileName);
         if (isset($_SESSION['id_user'])){
@@ -25,7 +26,7 @@ class User
         if (!empty($_POST['email']) && !empty($_POST['password'])) {
             try {
                 $dbh = Db::connexionBD();
-                $statement = $dbh->prepare('SELECT id_user, mdp FROM public.User WHERE email=:email');
+                $statement = $dbh->prepare('SELECT id_user, mdp FROM public.user WHERE email=:email');
                 $statement->bindParam(':email', $_POST['email']);
                 $statement->execute();
                 $result = $statement->fetch(PDO::FETCH_ASSOC);
@@ -49,6 +50,8 @@ class User
     }
 
     static function register() {
+
+
         if (!empty($_POST)) {
             if(empty($_POST['firstName'])) {
                 return 'Fill the first name field !';

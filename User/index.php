@@ -2,7 +2,7 @@
 ob_start();
 require_once ("../class/User.php");
 $user_id=User::Login();
-echo $user_id;
+
 ?>
 
     <section class="section">
