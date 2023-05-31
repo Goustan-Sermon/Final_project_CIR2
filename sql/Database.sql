@@ -23,7 +23,7 @@ CREATE TABLE public.User(
                             email            VARCHAR (150) NOT NULL ,
                             mdp              VARCHAR (256) NOT NULL ,
                             date_naissance   DATE  NOT NULL ,
-                            photo_profile    VARCHAR (150)   ,
+                            photo_profile    VARCHAR (150)  ,
                             CONSTRAINT User_PK PRIMARY KEY (id_user)
 )WITHOUT OIDS;
 

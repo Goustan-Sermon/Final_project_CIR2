@@ -99,7 +99,7 @@ class User
             }
 
             try {
-                $statement = $dbh->prepare("INSERT INTO public.User(nom, prenom, email, mdp,age) 
+                $statement = $dbh->prepare("INSERT INTO public.User(nom, prenom, email, mdp,date_naissance) 
                                                 VALUES (:nom, :prenom, :email, :mdp,:age)");
 
                 $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
@@ -113,7 +113,7 @@ class User
                 error_log('Connection error: '.$exception->getMessage());
                 return false;
             }
-            header('Location: index.php');
+           header('Location: index.php');
         }
         return false;
     }

@@ -41,8 +41,8 @@ $error=User::register();
                                     </div>
                                     <div class="col-md-6 mb-1 pb-2">
                                         <div class="input-box" style="width: 210px;">
-                                            <input type="number" name="Age" id="Age" min='1' value="<?php echo $_POST['phoneNumber']; ?>">
-                                            <label class="form-label" for="Age">Age</label>
+                                            <input style='color:white;' type="date" name="Age" id="Age" value="<?php echo $_POST['Age']; ?>">
+                                            <label class="form-label" for="Age">Date de naissance</label>
                                         </div>
                                     </div>
                                 </div>
