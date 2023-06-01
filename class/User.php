@@ -148,8 +148,23 @@ class User
 
     static function update_info($id, $prenom, $nom,$email)
         {
+            $error=array();
+            try{
+                $dbh=Db::connexionBD();
+                $statement = $dbh->prepare("SELECT email FROM public.utilisateur
+                                                WHERE email=:email");
+                $statement->bindParam(':email', $email);
+                $statement->execute();
+                $result = $statement->fetch(PDO::FETCH_ASSOC);
+            } catch (PDOException $exception) {
+                error_log('Connection error: '.$exception->getMessage());
+                return false;
+            }
 
-
+            if (!empty($result)) {
+                array_push($error,'The email already exist');
+                return $error;
+            }
             try
             {
                 $dbh=Db::connexionBD();

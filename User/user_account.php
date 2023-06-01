@@ -3,6 +3,9 @@ ob_start();
 require_once ("../class/User.php");
 $user_id=User::Login();
 $info=User::get_info_client($user_id);
+print_array($info);
+
+echo $info['nom'];
 
 
 ?>
@@ -74,14 +77,17 @@ $info=User::get_info_client($user_id);
             <form action="#" method="GET">
 
                 <label for="nomup">New Last name :</label>
-                <input type="text" id="nomup" name="nom" required><br>
+                <input type="text" id="nomup" name="nom" required value=<?php echo $info['nom']?>>
 
                 <label for="prenomup">New First name :</label>
-                <input type="text" id="prenomup" name="prenom" required><br>
+                <input type="text" id="prenomup" name="prenom" required value=<?php echo $info['prenom']?>><br>
 
 
                 <label for="emailup">New email :</label>
-                <input type="email" id="emailup" name="email" required><br>
+                <input type="email" id="emailup" name="email" required value=<?php echo $info['email']?>><br>
+
+
+
 
 
                 <button onclick="cacher_form()" id='new_data' type="button" value=<?php echo $user_id?>>Envoyer</button>
