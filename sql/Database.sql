@@ -82,7 +82,7 @@ CREATE TABLE public.Album(
                              id_album        SERIAL NOT NULL ,
                              titre_album     VARCHAR (50) NOT NULL ,
                              date_parution   DATE  NOT NULL ,
-                             image_album     VARCHAR (150) NOT NULL ,
+                             image_album     VARCHAR (150) ,
                              id_artiste      INT  NOT NULL ,
                              id_style        INT  NOT NULL  ,
                              CONSTRAINT Album_PK PRIMARY KEY (id_album)
