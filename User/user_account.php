@@ -55,17 +55,6 @@ $info=User::get_info_client($user_id);
                 </li>
             </ul>
         </div>
-
-        <div class="policies">
-            <ul>
-                <li>
-                    <a href="#">Cookies</a>
-                </li>
-                <li>
-                    <a href="#">Privacy</a>
-                </li>
-            </ul>
-        </div>
     </div>
     <input id='id_user' type='text' style='display: none;' value=<?php echo $user_id ?>>
     <div class="main-container" style="color:white;">
