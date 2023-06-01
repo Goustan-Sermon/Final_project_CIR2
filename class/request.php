@@ -40,18 +40,3 @@ if (!empty($result)) {
 // Bad request case.
 header('HTTP/1.1 400 Bad Request');
 
-?>
-
-if (!empty($result)) {
-    header('Content-Type: application/json; charset=utf-8');
-    header('Cache-control: no-store, no-cache, must-revalidate');
-    header('Pragma: no-cache');
-    header('HTTP/1.1 200 OK');
-    echo json_encode($result);
-    exit();
-}
-
-// Bad request case.
-header('HTTP/1.1 400 Bad Request');
-
-?>
