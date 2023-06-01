@@ -10,9 +10,10 @@ $info=User::get_info_client($user_id);
     <body>
 
     <div class="sidebar">
+        <h2 style="color: white; font-size: 2em; text-align: center">Banana Music</h2>
         <div class="logo">
             <a href="user_home.php">
-                <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png" alt="Logo" />
+                <img src="../image/banane.png" alt="Logo" />
             </a>
         </div>
 
