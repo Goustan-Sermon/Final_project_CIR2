@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title>Spotifiak</title>
+    <title>Banane Music</title>
 
     <link rel="stylesheet" type="text/css" href="../css/home.css">
+    <link rel="stylesheet" type="text/css" href="../css/account.css">
 
 
     <script src="../js/jquery3.4.1.js" async></script>

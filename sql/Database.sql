@@ -1,7 +1,7 @@
 ------------------------------------------------------------
 --        Script Postgre
 ------------------------------------------------------------
-
+DROP TABLE IF EXISTS public.user CASCADE ;
 DROP TABLE IF EXISTS public.Utilisateur CASCADE;
 DROP TABLE IF EXISTS public.Playlist CASCADE;
 DROP TABLE IF EXISTS public.Types_Artistes CASCADE;
@@ -132,4 +132,4 @@ CREATE TABLE public.Morceau_Artiste(
 )WITHOUT OIDS;
 
 
-
+UPDATE Utilisateur SET photo_profile='../image/default_profil.png' WHERE id_user=1;

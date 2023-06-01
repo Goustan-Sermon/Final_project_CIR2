@@ -1,45 +1,55 @@
+
 let id_user=document.getElementById('id_user').value
-console.log(id_user);
-ajaxRequest("GET", "../class/request.php/user/"+id_user, update_form);
+let form=document.getElementById('profil-form')
+ajaxRequest('GET','../class/request.php/user/'+id_user,display_user)
 
 
+function afficher_form(){
 
+    form.style.display='inline-block'
+}
 
-function update_form(info){
+function cacher_form(){
 
+    form.style.display='none';
+}
+
+function display_user(info){
 
     console.log(info)
+    $('#profil-card').html('')
+    $('#profil-card').append(' <div class="card-header">\n' +
+        '                <div class="pic">\n' +
+        '                    <img src="'+info['photo_profile']+'" alt="">\n' +
+        '                </div>\n' +
+        '                <div class="name">'+info['nom']+' '+info['prenom']+'</div>\n' +
+        '                <div class="desc">Age: '+info['age']+'</div>\n' +
+        '                <div class="desc">Email: '+info['email']+'</div>\n' +
+        '                <div class="desc">Birth date: '+info['date_naissance']+'</div>\n' +
+        '\n' +
+        '            </div>\n' +
+        '            <div class="card-footer">\n' +
+        '                <button type="button" value="'+info['id_user']+'" id="modifier" class="contact-btn" onclick="afficher_form()">Modify</button>\n' +
+        '            </div>\n' +
+        '        </div>')
 
-        console.log(info['nom'])
-        $('#form_update').html("")
-        $('#form_update').append('<form action="#" method="get" style="color:white">\n' +
-            '            <label for="nom">Nom :</label>\n' +
-            '            <input type="text" id="nom" name="nom" value="'+info['nom']+'"<br>\n' +
-            '\n' +
-            '            <label for="prenom">Prénom :</label>\n' +
-            '            <input type="text" id="prenom" name="prenom" value="'+info['prenom']+'"><br>\n' +
-            '\n' +
-            '            <label for="age">Âge :</label>\n' +
-            '            <input type="number" id="age" name="age" value="'+info['age']+'"><br>\n' +
-            '\n' +
-            '            <label for="email">Email :</label>\n' +
-            '            <input type="email" id="email" name="email" value="'+info['email']+'"><br>\n' +
-            '\n' +
-            '            <label for="password">Mot de passe :</label>\n' +
-            '            <input type="password" id="password" name="password" value="aaaaaaaaa"><br>\n' +
-            '\n' +
-            '            <button type="submit" name= "save" id="save" value="'+info['id_user']+'">Save</button>\n' +
-            '\n' +
-            '\n' +
-            '        </form>')
+    $("#new_data").click(function (event){
+        let id=$(event.target).attr('value')
+        let nom=document.getElementById('nomup').value
+        let prenom=document.getElementById('prenomup').value
+        let email=document.getElementById('emailup').value
+        event.preventDefault();
+        console.log(id,nom)
+        if (id!==undefined){
+            if (nom!== undefined && prenom !==undefined && email!==undefined){
+                ajaxRequest("PUT", "../class/request.php/user/" + id, () => {
+                    ajaxRequest("GET", "../class/request.php/user/" + id, display_user)
+                }, 'nom=' + nom + '&prenom=' + prenom+'&email='+email+'&id_user='+id)
+            }
+        }
 
-    $('#save').click(function (event){
 
-    let id=document.getElementById('save').value
-    console.log(id)
-    if( id!==undefined
+
     })
-
-
 
 }

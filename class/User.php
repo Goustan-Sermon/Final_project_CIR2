@@ -68,7 +68,15 @@ class User
                 return 'Email address is invalid !';
             }
             if (empty($_POST['Age'])) {
+
                 return 'Age is invalid !';
+            }else{
+                $res= new DateTime();
+                $day= new DateTime();
+                $a=explode('-',$_POST['Age']);
+                $res->setDate($a[0],$a[1],$a[2]);
+                if ($day<$res)
+                    return 'incorrect date';
             }
 
             if (empty($_POST['password'])) {
@@ -99,8 +107,8 @@ class User
             }
 
             try {
-                $statement = $dbh->prepare("INSERT INTO public.Utilisateur(nom, prenom, email, mdp,date_naissance) 
-                                                VALUES (:nom, :prenom, :email, :mdp,:age)");
+                $statement = $dbh->prepare("INSERT INTO public.Utilisateur(nom, prenom, email, mdp,date_naissance,photo_profile) 
+                                                VALUES (:nom, :prenom, :email, :mdp,:age,'../image/default_profil.png')");
 
                 $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
                 $statement->bindParam(":nom", $_POST['lastName']);
@@ -128,7 +136,7 @@ class User
     {
         try {
             $dbh = Db::connexionBD();
-            $statement = $dbh->prepare('SELECT * from public.Utilisateur WHERE id_user=:id');
+            $statement = $dbh->prepare('SELECT id_user,nom,prenom,email,date_naissance,photo_profile,EXTRACT(YEAR FROM AGE(CURRENT_DATE,date_naissance))as age from public.Utilisateur WHERE id_user=:id');
             $statement->bindParam(':id', $user_id);
             $statement->execute();
             return $statement->fetch(PDO::FETCH_ASSOC);
@@ -138,19 +146,39 @@ class User
         }
     }
 
-    static function update_info($db, $id, $prenom, $nom,$mdp,$email)
+    static function update_info($id, $prenom, $nom,$email)
         {
+            $error=array();
+            if (!filter_var($_POST['emailAddress'], FILTER_VALIDATE_EMAIL)) {
+                array_push($error,'The email is incorrect');
+            }
+
+
+            try{
+                $dbh=Db::connexionBD();
+                $statement = $dbh->prepare("SELECT email FROM public.utilisateur
+                                                WHERE email=:email");
+                $statement->bindParam(':email', $email);
+                $statement->execute();
+                $result = $statement->fetch(PDO::FETCH_ASSOC);
+            } catch (PDOException $exception) {
+                error_log('Connection error: '.$exception->getMessage());
+                return false;
+            }
+
+            if (!empty($result)) {
+                array_push($error,'The email already exist');
+                return $error;
+            }
             try
             {
-                $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
                 $dbh=Db::connexionBD();
-                $request = 'UPDATE public.Utilisateur SET nom=:nom , prenom=:prenom,mdp=:mdp,email=:email WHERE id_user=:id';
+                $request = 'UPDATE public.Utilisateur SET nom=:nom , prenom=:prenom,email=:email WHERE id_user=:id';
                 $statement = $dbh->prepare($request);
                 $statement->bindParam(':id', $id, PDO::PARAM_INT);
                 $statement->bindParam(':nom', $nom, PDO::PARAM_STR,50);
                 $statement->bindParam(':prenom', $prenom, PDO::PARAM_STR, 50);
-                $statement->bindParam(':mdp', $password, PDO::PARAM_STR, 255);
-                $statement->bindParam(':email', $prenom, PDO::PARAM_STR, 80);
+                $statement->bindParam(':email', $email, PDO::PARAM_STR, 80);
                 $statement->execute();
             }
             catch (PDOException $exception)
@@ -158,7 +186,7 @@ class User
                 error_log('Request error: '.$exception->getMessage());
                 return false;
             }
-            return true;
+            return True;
         }
 
 }

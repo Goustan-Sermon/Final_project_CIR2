@@ -3,6 +3,9 @@ ob_start();
 require_once ("../class/User.php");
 $user_id=User::Login();
 $info=User::get_info_client($user_id);
+print_array($info);
+
+echo $info['nom'];
 
 
 ?>
@@ -10,11 +13,13 @@ $info=User::get_info_client($user_id);
     <body>
 
     <div class="sidebar">
+        <a href="user_home.php">
+        <h2 style="color: white; font-size: 2em; text-align: center">Banana Music</h2>
         <div class="logo">
-            <a href="#">
-                <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png" alt="Logo" />
-            </a>
+            <img src="../image/banane.png" alt="Logo" />
+
         </div>
+        </a>
 
         <div class="navigation">
             <ul>
@@ -64,32 +69,34 @@ $info=User::get_info_client($user_id);
             </ul>
         </div>
     </div>
-
+    <input id='id_user' type='text' style='display: none;' value=<?php echo $user_id ?>>
     <div class="main-container" style="color:white;">
 
-        <form action="#" method="get" style="color:white">
-            <label for="nom">Nom :</label>
-            <input type="text" id="nom" name="nom" disabled value="<?php echo $info['nom']?>"<br>
+        <div id="profil-card" class="profile-card"></div>
 
-            <label for="prenom">Prénom :</label>
-            <input type="text" id="prenom" name="prenom" disabled value="<?php echo $info['prenom']?>"><br>
+        <div id="profil-form" style="display:none;">
+            <form action="#" method="GET">
 
-            <label for="age">Âge :</label>
-            <input type="number" id="age" name="age" disabled value="<?php echo $info['age']?>"><br>
+                <label for="nomup">New Last name :</label>
+                <input type="text" id="nomup" name="nom" required value=<?php echo $info['nom']?>>
 
-            <label for="email">Email :</label>
-            <input type="email" id="email" name="email" disabled value="<?php echo $info['email']?>"><br>
-
-            <label for="password">Mot de passe :</label>
-            <input type="password" id="password" name="password" disabled value="aaaaaaaaa"><br>
-
-            <button type="submit" name= "modify" id="id_user" value=<?php echo $info['id_user']?>>Modify</button>
+                <label for="prenomup">New First name :</label>
+                <input type="text" id="prenomup" name="prenom" required value=<?php echo $info['prenom']?>><br>
 
 
-        </form>
+                <label for="emailup">New email :</label>
+                <input type="email" id="emailup" name="email" required value=<?php echo $info['email']?>><br>
 
-        <div id="form_update"></div>
-    </div>
+
+
+
+
+                <button onclick="cacher_form()" id='new_data' type="button" value=<?php echo $user_id?>>Envoyer</button>
+                <button  type="button" value="Cancel" onclick="cacher_form()">Cancel</button>
+
+            </form>
+        </div>
+
 
 
 

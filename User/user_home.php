@@ -7,11 +7,14 @@ $user_id=User::Login();
 <body>
 
 <div class="sidebar">
+    <a href="user_home.php">
+    <h2 style="color: white">Banana Music</h2>
     <div class="logo">
-        <a href="user_home.php">
-            <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png" alt="Logo" />
-        </a>
+
+            <img src="../image/banane.png" alt="Logo" />
+
     </div>
+    </a>
 
     <div class="navigation">
         <ul>
@@ -49,17 +52,6 @@ $user_id=User::Login();
             </li>
         </ul>
     </div>
-
-    <div class="policies">
-        <ul>
-            <li>
-                <a href="#">Cookies</a>
-            </li>
-            <li>
-                <a href="#">Privacy</a>
-            </li>
-        </ul>
-    </div>
 </div>
 
 <div class="main-container">
@@ -72,25 +64,34 @@ $user_id=User::Login();
                 </label>
             </div>
         </div>
-
         <div class="navbar">
-
-            <button type="button"><a style="text-decoration: none;color=inherit;" href="user_logout.php">Log out</a></button>
+            <button type="button" style="display: flex; align-items: center;">
+                <a style="text-decoration: none;color=inherit;" href="user_logout.php">Log out</a>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                </svg>
+            </button>
         </div>
     </div>
 
-    <div class="spotify-playlists">
-        <h2>Spotify Playlists</h2>
 
-        <div class="list">
-            <div class="item">
-                <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
-                <div class="play">
-                    <span class="fa fa-play"><ion-icon style="padding-left: 2px;padding-top: 2px; font-size: 15px" name="play-outline"></ion-icon></span>
+
+    <div class="spotify-playlists">
+        <h2>Listened Recently</h2>
+
+        <div class="list cs-hidden" id="autoWidth">
+            <!-- exemple de carte --> 
+            <a href="#">
+                <div class="item">
+                    <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
+                    <div class="play">
+                        <span class="fa fa-play"><ion-icon style="padding-left: 2px;padding-top: 2px; font-size: 15px" name="play-outline"></ion-icon></span>
+                    </div>
+                    <h4>Today's Top Hits</h4>
+                    <p>Rema & Selena Gomez are on top of the...</p>
                 </div>
-                <h4>Today's Top Hits</h4>
-                <p>Rema & Selena Gomez are on top of the...</p>
-            </div>
+            </a>
 
             <div class="item">
                 <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
@@ -155,11 +156,15 @@ $user_id=User::Login();
                 <p>The biggest songs of the 1090s.</p>
             </div>
         </div>
+        <div class="button-container">
+            <a class="prev" onclick="scrollToPrev()">&#10094;</a>
+            <a class="next" onclick="scrollToNext()">&#10095;</a>
+        </div>
     </div>
 
     <div class="spotify-playlists">
-        <h2>Focus</h2>
-        <div class="list">
+        <h2>Banana Playlists</h2>
+        <div class="list cs-hidden" id="autoWidth1">
             <div class="item">
                 <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
                 <div class="play">
@@ -232,87 +237,15 @@ $user_id=User::Login();
                 <p>Focus with deep techno and tech house.</p>
             </div>
         </div>
-    </div>
-
-    <div class="spotify-playlists">
-        <h2>Mood</h2>
-        <div class="list">
-            <div class="item">
-                <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
-                <div class="play">
-                    <span class="fa fa-play"></span>
-                </div>
-                <h4>Mood Booster</h4>
-                <p>Get happy with today's dose of feel-good...</p>
-            </div>
-
-            <div class="item">
-                <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
-                <div class="play">
-                    <span class="fa fa-play"></span>
-                </div>
-                <h4>Feelin' Good</h4>
-                <p>Feel good with this positively timeless...</p>
-            </div>
-
-            <div class="item">
-                <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
-                <div class="play">
-                    <span class="fa fa-play"></span>
-                </div>
-                <h4>Dark & Stormy</h4>
-                <p>Beautifully dark, dramatic tracks.</p>
-            </div>
-
-            <div class="item">
-                <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
-                <div class="play">
-                    <span class="fa fa-play"></span>
-                </div>
-                <h4>Feel Good Piano</h4>
-                <p>Happy vibes for an upbeat morning.</p>
-            </div>
-
-            <div class="item">
-                <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
-                <div class="play">
-                    <span class="fa fa-play"></span>
-                </div>
-                <h4>Feelin' Myself</h4>
-                <p>The hip-hop playlist that's a whole mood...</p>
-            </div>
-
-            <div class="item">
-                <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
-                <div class="play">
-                    <span class="fa fa-play"></span>
-                </div>
-                <h4>Chill Tracks</h4>
-                <p>Softer kinda dance</p>
-            </div>
-
-            <div class="item">
-                <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
-                <div class="play">
-                    <span class="fa fa-play"></span>
-                </div>
-                <h4>Feel-Good Indie Rock</h4>
-                <p>The best indie rock vibes - classic and...</p>
-            </div>
-
-            <div class="item">
-                <img src="https://i.scdn.co/image/ab67616d0000b2733b5e11ca1b063583df9492db" />
-                <div class="play">
-                    <span class="fa fa-play"></span>
-                </div>
-                <h4>idk.</h4>
-                <p>idk.</p>
-            </div>
+        <div class="button-container">
+            <a class="prev" onclick="scrollToPrev2()">&#10094;</a>
+            <a class="next" onclick="scrollToNext2()">&#10095;</a>
         </div>
-
+    </div>
         <hr>
     </div>
 
+    <script src="../js/carousel.js"></script>
 
 
 <?php
