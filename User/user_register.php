@@ -62,6 +62,9 @@ $error=User::register();
                                 </div>
                                 <div class='alert'><?php echo $error ?></div>
                                 <button type="submit" value="Register">Register</button>
+                                <div class="register">
+                                    <p>Have an account ? <a href="index.php">Connect</a></p>
+                                </div>
                             </form>
                         </div>
                     </div>

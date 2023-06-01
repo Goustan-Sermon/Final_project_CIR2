@@ -65,9 +65,30 @@ $info=User::get_info_client($user_id);
             </ul>
         </div>
     </div>
-
+    <input id='id_user' type='text' style='display: none;' value=<?php echo $user_id ?>>
     <div class="main-container" style="color:white;">
 
+        <div id="profil-card" class="profile-card"></div>
+
+        <div id="profil-form" style="display:none;">
+            <form action="#" method="GET">
+
+                <label for="nomup">New Last name :</label>
+                <input type="text" id="nomup" name="nom" required><br>
+
+                <label for="prenomup">New First name :</label>
+                <input type="text" id="prenomup" name="prenom" required><br>
+
+
+                <label for="emailup">New email :</label>
+                <input type="email" id="emailup" name="email" required><br>
+
+
+                <button onclick="cacher_form()" id='new_data' type="button" value=<?php echo $user_id?>>Envoyer</button>
+                <button  type="button" value="Cancel" onclick="cacher_form()">Cancel</button>
+
+            </form>
+        </div>
 
 
 
