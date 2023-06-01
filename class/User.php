@@ -146,19 +146,53 @@ class User
         }
     }
 
-    static function update_info($id, $prenom, $nom,$email)
+    static function update_info($id, $prenom, $nom,$email,$date)
         {
             $error=array();
-            if (!filter_var($_POST['emailAddress'], FILTER_VALIDATE_EMAIL)) {
-                array_push($error,'The email is incorrect');
-            }
 
+            if (!empty($_POST)) {
+                if (empty($_POST['firstName'])) {
+                    array_push($error, 'Fill the first name field !');
+                    return $error;
+                }
+                if (empty($_POST['lastName'])) {
+                    array_push($error,  'Fill the last name field !');
+                    return $error;
+
+                }
+                if (empty($_POST['emailAddress'])) {
+                    array_push($error,  'Fill the email address field !');
+                    return $error;
+
+                }
+                if (!filter_var($_POST['emailAddress'], FILTER_VALIDATE_EMAIL)) {
+                    array_push($error, 'The email is incorrect');
+                    return $error;
+
+                }
+                if (empty($_POST['Age'])) {
+
+                    array_push($error, 'Age is invalid !');
+                    return $error;
+
+                }else{
+                    $res= new DateTime();
+                    $day= new DateTime();
+                    $a=explode('-',$_POST['Age']);
+                    $res->setDate($a[0],$a[1],$a[2]);
+                    if ($day<$res)
+                       array_push($error,'incorrect date');
+                    return $error;
+                }
+
+            }
 
             try{
                 $dbh=Db::connexionBD();
                 $statement = $dbh->prepare("SELECT email FROM public.utilisateur
-                                                WHERE email=:email");
+                                                WHERE email=:email AND id_user!=:id");
                 $statement->bindParam(':email', $email);
+                $statement->bindParam(':id', $id);
                 $statement->execute();
                 $result = $statement->fetch(PDO::FETCH_ASSOC);
             } catch (PDOException $exception) {
@@ -173,12 +207,13 @@ class User
             try
             {
                 $dbh=Db::connexionBD();
-                $request = 'UPDATE public.Utilisateur SET nom=:nom , prenom=:prenom,email=:email WHERE id_user=:id';
+                $request = 'UPDATE public.Utilisateur SET nom=:nom , prenom=:prenom,email=:email,date_naissance=:birth WHERE id_user=:id';
                 $statement = $dbh->prepare($request);
                 $statement->bindParam(':id', $id, PDO::PARAM_INT);
                 $statement->bindParam(':nom', $nom, PDO::PARAM_STR,50);
                 $statement->bindParam(':prenom', $prenom, PDO::PARAM_STR, 50);
                 $statement->bindParam(':email', $email, PDO::PARAM_STR, 80);
+                $statement->bindParam(':birth', $date, PDO::PARAM_STR, 80);
                 $statement->execute();
             }
             catch (PDOException $exception)

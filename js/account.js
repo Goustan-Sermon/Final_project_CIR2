@@ -38,13 +38,14 @@ function display_user(info){
         let nom=document.getElementById('nomup').value
         let prenom=document.getElementById('prenomup').value
         let email=document.getElementById('emailup').value
+        let birth=document.getElementById('birthup').value
         event.preventDefault();
         console.log(id,nom)
         if (id!==undefined){
             if (nom!== undefined && prenom !==undefined && email!==undefined){
                 ajaxRequest("PUT", "../class/request.php/user/" + id, () => {
                     ajaxRequest("GET", "../class/request.php/user/" + id, display_user)
-                }, 'nom=' + nom + '&prenom=' + prenom+'&email='+email+'&id_user='+id)
+                }, 'nom=' + nom + '&prenom=' + prenom+'&email='+email+'&id_user='+id+'&date='+birth)
             }
         }
 

@@ -17,7 +17,7 @@ switch ($requestRessource) {
             case 'PUT':
                 parse_str(file_get_contents('php://input'), $_PUT);
                 if(isset($_PUT) and $id){
-                    $result=User::update_info($id,$_PUT["prenom"],$_PUT["nom"],$_PUT["email"]);
+                    $result=User::update_info($id,$_PUT["prenom"],$_PUT["nom"],$_PUT["email"],$_PUT["date"]);
                     break;
                 }
                 break;

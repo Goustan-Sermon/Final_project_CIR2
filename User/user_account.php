@@ -3,9 +3,7 @@ ob_start();
 require_once ("../class/User.php");
 $user_id=User::Login();
 $info=User::get_info_client($user_id);
-print_array($info);
 
-echo $info['nom'];
 
 
 ?>
@@ -86,6 +84,9 @@ echo $info['nom'];
 
                 <label for="emailup">New email :</label>
                 <input type="email" id="emailup" name="email" required value=<?php echo $info['email']?>><br>
+
+                <label for="birthup">New Birth-date :</label>
+                <input type="date" id="birthup" name="birth" required value=<?php echo $info['date_naissance']?>><br>
 
 
 
