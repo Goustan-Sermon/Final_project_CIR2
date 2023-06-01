@@ -149,6 +149,11 @@ class User
     static function update_info($id, $prenom, $nom,$email)
         {
             $error=array();
+            if (!filter_var($_POST['emailAddress'], FILTER_VALIDATE_EMAIL)) {
+                array_push($error,'The email is incorrect');
+            }
+
+
             try{
                 $dbh=Db::connexionBD();
                 $statement = $dbh->prepare("SELECT email FROM public.utilisateur

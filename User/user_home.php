@@ -7,12 +7,14 @@ $user_id=User::Login();
 <body>
 
 <div class="sidebar">
+    <a href="user_home.php">
     <h2 style="color: white">Banana Music</h2>
     <div class="logo">
-        <a href="user_home.php">
+
             <img src="../image/banane.png" alt="Logo" />
-        </a>
+
     </div>
+    </a>
 
     <div class="navigation">
         <ul>
