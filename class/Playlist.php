@@ -46,7 +46,7 @@ GROUP BY
         try {
             $dbh = Db::connexionBD();
 
-            $statement = $dbh->prepare("SELECT p.nom_playlist, p.date_playlist, p.image_playlist, u.nom, u.prenom
+            $statement = $dbh->prepare("SELECT p.nom_playlist, p.date_playlist, p.image_playlist, p.id_playlist, u.nom, u.prenom
                                                 FROM public.Playlist p
                                                 JOIN public.Utilisateur u ON p.id_user = u.id_user
                                                 WHERE nom_playlist ILIKE ':search%'");

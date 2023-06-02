@@ -6,7 +6,7 @@ class Artist
         try {
             $dbh = Db::connexionBD();
 
-            $statement = $dbh->prepare("SELECT nom_artiste
+            $statement = $dbh->prepare("SELECT nom_artiste, id_artiste
                                             FROM public.artiste
                                             WHERE nom_artiste ILIKE ':search%'");
             $statement->bindParam(':search', $search);
