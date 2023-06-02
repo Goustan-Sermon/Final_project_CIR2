@@ -79,46 +79,41 @@ $user_id=User::Login();
     </div>
 
 
-
-    <div class="spotify-playlists">
-        <h2>Album</h2>
+    <div id="scrollable-content">
+        <div class="spotify-playlists">
+            <h2>Album</h2>
 
         <div class="list cs-hidden" >
             <form action="user_home.php" method="get" id="autoWidth"></form>
 
+            </div>
+            <div class="button-container">
+                <a class="prev" onclick="scrollToPrev()">&#10094;</a>
+                <a class="next" onclick="scrollToNext()">&#10095;</a>
+            </div>
         </div>
-        <div class="button-container">
-            <a class="prev" onclick="scrollToPrev()">&#10094;</a>
-            <a class="next" onclick="scrollToNext()">&#10095;</a>
+
+        <div class="spotify-playlists">
+            <h2>Music</h2>
+            <div class="list cs-hidden" id="autoWidth1"></div>
+            <div class="button-container">
+                <a class="prev" onclick="scrollToPrev2()">&#10094;</a>
+                <a class="next" onclick="scrollToNext2()">&#10095;</a>
+            </div>
+        </div>
+
+        <div id='b_playlist' class="spotify-playlists">
+            <h2>Banana Playlists</h2>
+            <div class="list cs-hidden" id="autoWidth2"></div>
+            <div class="button-container">
+                <a class="prev" onclick="scrollToPrev3()">&#10094;</a>
+                <a class="next" onclick="scrollToNext3()">&#10095;</a>
+            </div>
         </div>
     </div>
 
-    <div class="spotify-playlists">
-        <h2>Music</h2>
-        <div class="list cs-hidden" id="autoWidth1"></div>
-        <div class="button-container">
-            <a class="prev" onclick="scrollToPrev2()">&#10094;</a>
-            <a class="next" onclick="scrollToNext2()">&#10095;</a>
-        </div></div>
-
-    <div id='b_playlist' class="spotify-playlists">
-        <h2>Banana Playlists</h2>
-        <div class="list cs-hidden" id="autoWidth2"></div>
-        <div class="button-container">
-            <a class="prev" onclick="scrollToPrev3()">&#10094;</a>
-            <a class="next" onclick="scrollToNext3()">&#10095;</a>
-        </div>
-
-
-        <hr>
-
-
     <script src="../js/carousel.js"></script>
-
-
-
-
-
+    <script src="../js/scrollbar.js"></script>
 <?php
 $content_home = ob_get_clean();
 require_once('template_home.php');
