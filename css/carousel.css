@@ -6,7 +6,8 @@
 }
 
 #autoWidth,
-#autoWidth1 {
+#autoWidth1,
+#autoWidth2 {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: scroll;

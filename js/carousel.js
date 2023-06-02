@@ -29,3 +29,19 @@ function scrollToPrev2() {
         behavior: 'smooth'
     });
 }
+
+function scrollToNext3() {
+    var container = document.getElementById("autoWidth2");
+    container.scrollBy({
+        left: 400,
+        behavior: 'smooth'
+    });
+}
+
+function scrollToPrev3() {
+    var container = document.getElementById("autoWidth2");
+    container.scrollBy({
+        left: -400,
+        behavior: 'smooth'
+    });
+}

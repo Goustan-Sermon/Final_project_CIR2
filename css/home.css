@@ -4,7 +4,7 @@
 }
 body {
     background-color: #121212;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins',sans-serif;
 }
 
 .sidebar {
@@ -149,7 +149,7 @@ body {
 }
 .spotify-playlists h2 {
     color: #ffffff;
-    font-size: 1.375rem;
+    font-size: 2.5rem;
     margin-bottom: 1.25rem;
 }
 .spotify-playlists .list {
@@ -187,9 +187,9 @@ body {
     opacity: 0;
     transition: all ease 0.4s;
 }
-.spotify-playlists .list .item:hover .play .fa {
+.spotify-playlists .list .item:hover .play .fa-play {
     opacity: 1;
-    transform: translateY(-1.25rem);
+    transform: translateY(-1.00rem);
 }
 .spotify-playlists .list .item h4 {
     color: #ffffff;

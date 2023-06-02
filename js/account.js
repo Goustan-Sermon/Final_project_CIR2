@@ -35,6 +35,7 @@ function display_user(info){
 
     $("#new_data").click(function (event){
         let id=$(event.target).attr('value')
+        console.log(id)
         let nom=document.getElementById('nomup').value
         let prenom=document.getElementById('prenomup').value
         let email=document.getElementById('emailup').value

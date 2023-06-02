@@ -1,5 +1,8 @@
 <?php
 require_once ('User.php');
+require_once ('Playlist.php');
+require_once ('Music.php');
+require_once ('Album.php');
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $request = substr($_SERVER['PATH_INFO'], 1);
@@ -24,8 +27,29 @@ switch ($requestRessource) {
             case 'GET':
             $result=User::get_info_client($id);
             break;
+
         }
     break;
+    case 'playlist':
+        switch ($requestMethod){
+            case 'GET':
+                $result=Playlist::get_playlist($id);
+                break;
+        }
+        break;
+    case 'music':
+        switch ($requestMethod){
+            case 'GET':
+                $result=Music::get_music();
+                break;
+
+        }
+        break;
+    case 'album':
+        switch ($requestMethod){
+            case 'GET':
+                $result=Album::get_album();
+        }
 }
 
 if (!empty($result)) {
