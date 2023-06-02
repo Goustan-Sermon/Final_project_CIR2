@@ -12,8 +12,8 @@
     <link rel="stylesheet" type="text/css" href="../css/client.css">
     <link rel="stylesheet" type="text/css" href="../css/carousel.css">
 
-    <script src="../js/jquery3.4.1.js" async></script>
-    <script src="../js/ajax.js" async></script>
+    <script src="../js/jquery3.4.1.js" defer></script>
+    <script src="../js/ajax.js" defer></script>
 </head>
 <body>
 

@@ -4,11 +4,30 @@ require_once ('Database.php');
 class Album
 {
 
+    static function get_music_by_album($id_playlist){
+        try {
+            $dbh = Db::connexionBD();
+            $statement = $dbh->prepare("SELECT m.titre_morceau, m.duree, a.nom_artiste, s.style, al.titre_album, al.image_album,al.date_parution
+FROM Morceau m
+JOIN Album al ON m.id_album = al.id_album
+JOIN Artiste a ON al.id_artiste = a.id_artiste
+JOIN Styles_Musicaux s ON al.id_style = s.id_style
+WHERE al.id_album = :id_album;
+");
+            $statement->bindParam(':id_album', $id_playlist);
+            $statement->execute();
+            return $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        } catch (PDOException $exception) {
+            error_log('Connection error: ' . $exception->getMessage());
+            return false;
+        }
+    }
     function get_album(){
 
         try {
             $dbh = Db::connexionBD();
-            $statement = $dbh->prepare("SELECT Album.titre_album, Artiste.nom_artiste, Album.image_album, SUM(Morceau.duree) AS duree_totale
+            $statement = $dbh->prepare("SELECT Album.id_album,Album.titre_album, Artiste.nom_artiste, Album.image_album, SUM(Morceau.duree) AS duree_totale
 FROM Album
 JOIN Artiste ON Album.id_artiste = Artiste.id_artiste
 JOIN Morceau ON Album.id_album = Morceau.id_album

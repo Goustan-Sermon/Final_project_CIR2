@@ -5,6 +5,8 @@ require_once ('Database.php');
 class Playlist
 {
 
+
+
     static function get_playlist($id){
 
         try {
@@ -39,7 +41,7 @@ GROUP BY
             error_log('Connection error: ' . $exception->getMessage());
             return false;
         }
-    }
+
     function playlist_filter($search){
         try {
             $dbh = Db::connexionBD();
@@ -58,4 +60,4 @@ GROUP BY
         return $result;
     }
 
-}
+}}

@@ -13,7 +13,7 @@
 
 
 
-    <script src="../js/jquery3.4.1.js" async></script>
+    <script src="../js/jquery3.4.1.js" defer></script>
 </head>
 <body>
 

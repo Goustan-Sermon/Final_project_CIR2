@@ -49,7 +49,16 @@ switch ($requestRessource) {
         switch ($requestMethod){
             case 'GET':
                 $result=Album::get_album();
+                break;
         }
+        break;
+    case 'showmusic':
+        switch ($requestMethod){
+            case 'GET':
+                $result=Album::get_music_by_album($id);
+                break;
+        }
+        break;
 }
 
 if (!empty($result)) {
