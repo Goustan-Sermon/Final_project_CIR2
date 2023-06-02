@@ -47,7 +47,7 @@ GROUP BY
             $statement = $dbh->prepare("SELECT p.nom_playlist, p.date_playlist, p.image_playlist, u.nom, u.prenom
                                                 FROM public.Playlist p
                                                 JOIN public.Utilisateur u ON p.id_user = u.id_user
-                                                WHERE nom_playlist ILIKE '%:search%'");
+                                                WHERE nom_playlist ILIKE ':search%'");
             $statement->bindParam(':search', $search);
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);

@@ -8,7 +8,7 @@ class Artist
 
             $statement = $dbh->prepare("SELECT nom_artiste
                                             FROM public.artiste
-                                            WHERE nom_artiste ILIKE '%:search%'");
+                                            WHERE nom_artiste ILIKE ':search%'");
             $statement->bindParam(':search', $search);
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);

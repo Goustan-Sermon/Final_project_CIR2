@@ -27,7 +27,7 @@ GROUP BY Album.id_album, Album.titre_album, Artiste.nom_artiste, Album.image_alb
             $statement = $dbh->prepare("SELECT a.titre_album, a.date_parution, a.image_album, ar.nom_artiste
                                             FROM public.album a
                                             JOIN public.artiste ar ON a.id_artiste = ar.id_artiste
-                                            WHERE titre_album ILIKE '%:search%'");
+                                            WHERE titre_album ILIKE ':search%'");
             $statement->bindParam(':search', $search);
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
