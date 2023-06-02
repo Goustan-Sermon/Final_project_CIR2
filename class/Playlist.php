@@ -59,5 +59,23 @@ GROUP BY
         }
         return $result;
     }
+    function create_playlist($name, $image){
+        try {
+            $dbh = Db::connexionBD();
+
+            $statement = $dbh->prepare("INSERT INTO public.playlist(nom_playlist, date_playlist, image_playlist, id_user) 
+                                            VALUES(:name, current_date, :image, 
+                                                   SELECT id_user FROM public.utilisateur
+                                                   WHERE email = :_POST['emailAddress']");
+            $statement->bindParam(":name", $name);
+            $statement->bindParam(":image", $image);
+            $statement->bindParam(":_POST['emailAddress']", $_POST['emailAddress']);
+            $statement->execute();
+        } catch (PDOException $exception) {
+            error_log('Connection error: '.$exception->getMessage());
+            return false;
+        }
+        return 0;
+    }
 
 }}
