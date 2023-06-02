@@ -5,6 +5,8 @@
 body {
     background-color: #121212;
     font-family: 'Poppins',sans-serif;
+    overflow-y: scroll; /* Permet le défilement vertical */
+
 }
 
 .sidebar {

@@ -1,11 +1,7 @@
 <?php
 ob_start();
 require_once ("../class/User.php");
-
 $user_id=User::Login();
-
-
-
 
 
 ?>
@@ -61,7 +57,7 @@ $user_id=User::Login();
     </div>
 </div>
 
-<div class="main-container">
+<div class="main-container" id="body">
     <div class="topbar">
         <div class="prev-next-buttons">
             <div class="search-box">
@@ -87,7 +83,8 @@ $user_id=User::Login();
         <div class="spotify-playlists">
             <h2>Album</h2>
 
-            <div class="list cs-hidden" id="autoWidth">
+        <div class="list cs-hidden" >
+            <form action="user_home.php" method="get" id="autoWidth"></form>
 
             </div>
             <div class="button-container">

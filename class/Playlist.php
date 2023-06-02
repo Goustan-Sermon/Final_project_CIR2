@@ -5,6 +5,8 @@ require_once ('Database.php');
 class Playlist
 {
 
+
+
     static function get_playlist($id){
 
         try {
@@ -39,7 +41,23 @@ GROUP BY
             error_log('Connection error: ' . $exception->getMessage());
             return false;
         }
+
+    function playlist_filter($search){
+        try {
+            $dbh = Db::connexionBD();
+
+            $statement = $dbh->prepare("SELECT p.nom_playlist, p.date_playlist, p.image_playlist, u.nom, u.prenom
+                                                FROM public.Playlist p
+                                                JOIN public.Utilisateur u ON p.id_user = u.id_user
+                                                WHERE nom_playlist ILIKE ':search%'");
+            $statement->bindParam(':search', $search);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $exception) {
+            error_log('Connection error: '.$exception->getMessage());
+            return false;
+        }
+        return $result;
     }
 
-
-}
+}}
