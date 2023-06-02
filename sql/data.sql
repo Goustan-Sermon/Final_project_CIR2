@@ -1,12 +1,12 @@
 --DELETE FROM public.Utilisateur;
-DELETE FROM public.Morceau_Playlist;
-DELETE FROM public.Playlist;
-DELETE FROM public.Morceau_Artiste;
-DELETE FROM public.Morceau;
-DELETE FROM public.Album;
-DELETE FROM public.Artiste;
-DELETE FROM public.Types_Artistes;
-DELETE FROM public.Styles_Musicaux;
+DELETE FROM public.Morceau_Playlist WHERE id_morceau BETWEEN 1 AND 100000;
+DELETE FROM public.Playlist WHERE id_playlist BETWEEN 1 AND 100000;
+DELETE FROM public.Morceau_Artiste WHERE id_morceau BETWEEN 1 AND 100000;
+DELETE FROM public.Morceau WHERE id_morceau BETWEEN 1 AND 100000;
+DELETE FROM public.Album WHERE id_album BETWEEN 1 AND 100000;
+DELETE FROM public.Artiste WHERE id_artiste BETWEEN 1 AND 100000;
+DELETE FROM public.Types_Artistes WHERE id_type BETWEEN 1 AND 100000;
+DELETE FROM public.Styles_Musicaux WHERE id_style BETWEEN 1 AND 100000;
 
 
 ALTER SEQUENCE styles_musicaux_id_style_seq RESTART;
@@ -22,7 +22,7 @@ ALTER SEQUENCE album_id_album_seq RESTART;
 INSERT INTO Album(titre_album, date_parution, image_album, id_artiste, id_style) VALUES 
 ('JACK BOYS','2019-12-27','https://i.scdn.co/image/ab67616d0000b273dfc2f59568272de50a257f2f',1,1), 
 ('ASTRO WORLD','2018-08-03','https://i.scdn.co/image/ab67616d0000b273072e9faef2ef7b6db63834a3',1,1), 
-('Perdu d"Avance','2009-02-16','https://i.scdn.co/image/ab67616d0000b2730b2e3999b189fa2a8a6a752f',2,2),
+('Perdu d''Avance','2009-02-16','https://i.scdn.co/image/ab67616d0000b2730b2e3999b189fa2a8a6a752f',2,2),
 ('Le chant des sirènes','2011-09-26','https://i.scdn.co/image/ab67616d0000b27342a91184c215f8a95b5f77ec',2,2), 
 ('23','2022-02-25','https://i.scdn.co/image/ab67616d0000b273e1f05c994777b79bc5c87547',3,1);
 
