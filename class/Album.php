@@ -43,7 +43,7 @@ GROUP BY Album.id_album, Album.titre_album, Artiste.nom_artiste, Album.image_alb
         try {
             $dbh = Db::connexionBD();
 
-            $statement = $dbh->prepare("SELECT a.titre_album, a.date_parution, a.image_album, ar.nom_artiste
+            $statement = $dbh->prepare("SELECT a.titre_album, a.date_parution, a.image_album, a.id_album, ar.nom_artiste
                                             FROM public.album a
                                             JOIN public.artiste ar ON a.id_artiste = ar.id_artiste
                                             WHERE titre_album ILIKE ':search%'");

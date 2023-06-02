@@ -29,7 +29,7 @@ ORDER BY random();");
         try {
             $dbh = Db::connexionBD();
 
-            $statement = $dbh->prepare("SELECT Morceau.titre_morceau, Artiste.nom_artiste, Morceau.duree, Album.image_album, Morceau.extrait
+            $statement = $dbh->prepare("SELECT Morceau.titre_morceau, Artiste.nom_artiste, Morceau.duree, Album.image_album, Morceau.extrait, Morceau.id_morceau
                                             FROM Morceau
                                             INNER JOIN Morceau_Artiste ON Morceau.id_morceau = Morceau_Artiste.id_morceau
                                             INNER JOIN Artiste ON Morceau_Artiste.id_artiste = Artiste.id_artiste
