@@ -3,6 +3,7 @@ require_once ('User.php');
 require_once ('Playlist.php');
 require_once ('Music.php');
 require_once ('Album.php');
+require_once ('Artist.php');
 
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 $request = substr($_SERVER['PATH_INFO'], 1);
@@ -19,43 +20,72 @@ switch ($requestRessource) {
         switch ($requestMethod) {
             case 'PUT':
                 parse_str(file_get_contents('php://input'), $_PUT);
-                if(isset($_PUT) and $id){
-                    $result=User::update_info($id,$_PUT["prenom"],$_PUT["nom"],$_PUT["email"],$_PUT["date"]);
+                if (isset($_PUT) and $id) {
+                    $result = User::update_info($id, $_PUT["prenom"], $_PUT["nom"], $_PUT["email"], $_PUT["date"]);
                     break;
                 }
                 break;
             case 'GET':
-            $result=User::get_info_client($id);
-            break;
+                $result = User::get_info_client($id);
+                break;
 
         }
-    break;
+        break;
     case 'playlist':
-        switch ($requestMethod){
+        switch ($requestMethod) {
             case 'GET':
-                $result=Playlist::get_playlist($id);
+                $result = Playlist::get_playlist($id);
                 break;
         }
         break;
     case 'music':
-        switch ($requestMethod){
+        switch ($requestMethod) {
             case 'GET':
-                $result=Music::get_music();
+                $result = Music::get_music();
                 break;
 
         }
         break;
     case 'album':
-        switch ($requestMethod){
+        switch ($requestMethod) {
             case 'GET':
-                $result=Album::get_album();
+                $result = Album::get_album();
                 break;
         }
         break;
     case 'showmusic':
+        switch ($requestMethod) {
+            case 'GET':
+                $result = Album::get_music_by_album($id);
+                break;
+        }
+        break;
+    case 'showartiste':
         switch ($requestMethod){
             case 'GET':
-                $result=Album::get_music_by_album($id);
+                $result=Artist::get_album_by_artist($id);
+                break;
+        }
+        break;
+    case 'filter_artiste':
+        switch ($requestMethod){
+            case 'GET':
+                $result = Artist::artist_filter($_GET['search']);
+                break;
+
+        }
+        break;
+    case 'filtrer_album':
+        switch ($requestMethod) {
+            case 'GET':
+                $result = Album::album_filter($_GET['search']);
+                break;
+        }
+        break;
+    case 'filtrer_music':
+        switch ($requestMethod) {
+            case 'GET':
+                $result = Music::music_filter($_GET['search']);
                 break;
         }
         break;

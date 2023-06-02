@@ -25,7 +25,7 @@ ORDER BY random();");
             return false;
         }
     }
-    function music_filter($search){
+    static function music_filter($search){
         try {
             $dbh = Db::connexionBD();
 
@@ -35,10 +35,10 @@ ORDER BY random();");
                                             INNER JOIN Artiste ON Morceau_Artiste.id_artiste = Artiste.id_artiste
                                             INNER JOIN Album ON Morceau.id_album = Album.id_album   
                                             WHERE Morceau.titre_morceau
-                                            ILIKE ':search%';");
+                                            ILIKE  :search || '%';");
             $statement->bindParam(':search', $search);
             $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());
             return false;

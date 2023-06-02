@@ -5,8 +5,6 @@ require_once ('Database.php');
 class Playlist
 {
 
-
-
     static function get_playlist($id){
 
         try {

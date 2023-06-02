@@ -3,7 +3,6 @@ ob_start();
 require_once ("../class/User.php");
 $user_id=User::Login();
 
-
 ?>
 
     <input id='id_user_home' type='text' style='display: none;' value=<?php echo $user_id ?>>
@@ -61,10 +60,17 @@ $user_id=User::Login();
     <div class="topbar">
         <div class="prev-next-buttons">
             <div class="search-box">
-                <button class="btn-search"><ion-icon name="search-outline"></ion-icon></button>
+                <form method="get">
+                <button type="submit" class="btn-search" id="loop"><ion-icon name="search-outline"></ion-icon></button>
                 <label>
-                    <input type="text" class="input-search" placeholder="Type to Search...">
+                    <input type="text" id="search" class="input-search" placeholder="Type to Search...">
+                    <select id="Select">
+                        <option value="Album">Album</option>
+                        <option value="Artiste">Artist</option>
+                        <option value="Music">Music</option>
+                    </select>
                 </label>
+                </form>
             </div>
         </div>
         <div class="navbar">
@@ -79,12 +85,16 @@ $user_id=User::Login();
     </div>
 
     <div class="spotify-playlists">
-        <h2>Album</h2>
-        <div class="list cs-hidden" >
-            <div id="scrollable-content">
-                <form action="user_home.php" method="get" id="autoWidth"></form>
-            </div>
+        <div id="search_result"></div>
+        <div class="list cs-hidden" id="autoWidth3">
+
         </div>
+
+    </div>
+
+    <div class="spotify-playlists">
+        <h2>Album</h2>
+        <div class="list cs-hidden" id="autoWidth"></div>
         <div class="button-container">
             <a class="prev" onclick="scrollToPrev()">&#10094;</a>
             <a class="next" onclick="scrollToNext()">&#10095;</a>
@@ -108,6 +118,8 @@ $user_id=User::Login();
             <a class="next" onclick="scrollToNext3()">&#10095;</a>
         </div>
     </div>
+
+
 
     <script src="../js/carousel.js"></script>
 <?php

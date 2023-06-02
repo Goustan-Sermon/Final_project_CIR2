@@ -23,7 +23,7 @@ WHERE al.id_album = :id_album;
             return false;
         }
     }
-    function get_album(){
+    static function get_album(){
 
         try {
             $dbh = Db::connexionBD();
@@ -39,17 +39,22 @@ GROUP BY Album.id_album, Album.titre_album, Artiste.nom_artiste, Album.image_alb
             return false;
         }
     }
-    function album_filter($search){
+    static function album_filter($search){
         try {
             $dbh = Db::connexionBD();
 
             $statement = $dbh->prepare("SELECT a.titre_album, a.date_parution, a.image_album, a.id_album, ar.nom_artiste
                                             FROM public.album a
                                             JOIN public.artiste ar ON a.id_artiste = ar.id_artiste
-                                            WHERE titre_album ILIKE ':search%'");
+                                            WHERE titre_album ILIKE :search || '%'");
             $statement->bindParam(':search', $search);
             $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            if(empty($result)){
+
+                return "false";
+            }
         } catch (PDOException $exception) {
             error_log('Connection error: '.$exception->getMessage());
             return false;

@@ -16,7 +16,7 @@ ALTER SEQUENCE types_artistes_id_type_seq RESTART;
 INSERT INTO types_artistes(type_artiste) VALUES ('Chanteur'), ('DJ'), ('Groupe');
 
 ALTER SEQUENCE artiste_id_artiste_seq RESTART;
-INSERT INTO artiste(nom_artiste, id_type) VALUES ('Travis Scott', 1), ('Orelsan',1), ('Central Cee',1);
+INSERT INTO artiste(nom_artiste, id_type,image_artiste) VALUES ('Travis Scott', 1,'https://i.scdn.co/image/ab6761610000e5ebe707b87e3f65997f6c09bfff'), ('Orelsan',1,'https://i.scdn.co/image/ab6761610000e5eb32086a424e6f1e499e347cde'), ('Central Cee',1,'https://i.scdn.co/image/ab6761610000e5eb04fd53cd7eb0cf48d82de940');
 
 ALTER SEQUENCE album_id_album_seq RESTART;
 INSERT INTO Album(titre_album, date_parution, image_album, id_artiste, id_style) VALUES 
@@ -71,6 +71,6 @@ INSERT INTO morceau_artiste(id_artiste, id_morceau) VALUES (2,9), (2,10), (2,11)
 INSERT INTO morceau_artiste(id_artiste, id_morceau) VALUES (3,15),(3,16),(3,17);
 
 ALTER SEQUENCE playlist_id_playlist_seq RESTART;
-INSERT INTO playlist(nom_playlist, date_playlist, image_playlist, id_user)  VALUES('Banana"s playlist',CURRENT_DATE,'../image/banane.png',1);
+--INSERT INTO playlist(nom_playlist, date_playlist, image_playlist, id_user)  VALUES('Banana"s playlist',CURRENT_DATE,'../image/banane.png',1);
 
-INSERT INTO morceau_playlist(id_morceau, id_playlist) VALUES (1,1), (6,1), (10,1), (3,1), (7,1);
+--INSERT INTO morceau_playlist(id_morceau, id_playlist) VALUES (1,1), (6,1), (10,1), (3,1), (7,1);

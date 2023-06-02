@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href="../css/client.css">
     <link rel="stylesheet" type="text/css" href="../css/carousel.css">
     <link rel="stylesheet" type="text/css" href="../css/playlist.css">
-    <script src="../js/scrollbar.js"></script>
     <script src="../js/jquery3.4.1.js" defer></script>
     <script src="../js/ajax.js" defer></script>
     <script src="../js/accueuil.js" defer></script>

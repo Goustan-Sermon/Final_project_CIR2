@@ -58,6 +58,7 @@ CREATE TABLE public.Artiste(
                                id_artiste    SERIAL NOT NULL ,
                                nom_artiste   VARCHAR (50) NOT NULL ,
                                id_type       INT  NOT NULL  ,
+                               image_artiste VARCHAR (150)  ,
                                CONSTRAINT Artiste_PK PRIMARY KEY (id_artiste)
 
     ,CONSTRAINT Artiste_Types_Artistes_FK FOREIGN KEY (id_type) REFERENCES public.Types_Artistes(id_type)
@@ -131,22 +132,3 @@ CREATE TABLE public.Morceau_Artiste(
     ,CONSTRAINT Morceau_Artiste_Morceau0_FK FOREIGN KEY (id_morceau) REFERENCES public.Morceau(id_morceau)
 )WITHOUT OIDS;
 
-SELECT nom_playlist, date_playlist, image_playlist FROM public.Playlist WHERE nom_playlist ILIKE 'Tr%';
-SELECT nom_artiste FROM public.Artiste WHERE nom_artiste ILIKE 'Tr%';
-SELECT titre_morceau FROM public.morceau WHERE titre_morceau ILIKE '%A%';
-SELECT titre_album FROM public.album WHERE titre_album ILIKE '%A%';
-SELECT a.titre_album, a.date_parution, a.image_album, ar.nom_artiste
-FROM public.album a
-         JOIN public.artiste ar ON a.id_artiste = ar.id_artiste
-WHERE titre_album ILIKE 'Tr%';
-SELECT Morceau.titre_morceau, Artiste.nom_artiste, Morceau.duree, Album.image_album, Morceau.extrait
-FROM Morceau
-         INNER JOIN Morceau_Artiste ON Morceau.id_morceau = Morceau_Artiste.id_morceau
-         INNER JOIN Artiste ON Morceau_Artiste.id_artiste = Artiste.id_artiste
-         INNER JOIN Album ON Morceau.id_album = Album.id_album
-WHERE Morceau.titre_morceau
-          ILIKE '%a%';
-SELECT p.nom_playlist, p.date_playlist, p.image_playlist, u.nom, u.prenom
-FROM public.Playlist p
-         JOIN public.Utilisateur u ON p.id_user = u.id_user
-WHERE nom_playlist ILIKE 'Tr%'
