@@ -36,6 +36,23 @@ switch ($requestRessource) {
             case 'GET':
                 $result = Playlist::get_playlist($id);
                 break;
+            case 'POST':
+                if (isset($_POST)) {
+                    $result = Playlist::add_music($_POST['music'], $_POST['playlist']);
+                    break;
+                }
+        }
+        break;
+    case 'playlist_music':
+        switch ($requestMethod){
+            case'GET':
+                $result=Playlist::get_playlist_music($id);
+                break;
+            case'DELETE':
+                $result=Playlist::delete_music($_GET['music'],$_GET['playlist']);
+                break;
+            case'POST':
+                $result=Playlist::create_playlist($id,$_POST['nom']);
         }
         break;
     case 'music':
@@ -89,6 +106,14 @@ switch ($requestRessource) {
                 break;
         }
         break;
+    case 'listenmusic':
+        switch ($requestMethod) {
+            case 'GET':
+                $result=Music::get_music_by_id($id);
+                break;
+        }
+        break;
+
 }
 
 if (!empty($result)) {

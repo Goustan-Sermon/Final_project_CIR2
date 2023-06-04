@@ -12,13 +12,22 @@
     <link rel="stylesheet" type="text/css" href="../css/client.css">
     <link rel="stylesheet" type="text/css" href="../css/carousel.css">
     <link rel="stylesheet" type="text/css" href="../css/playlist.css">
+    <link rel="stylesheet" type="text/css" href="../css/audio_player.css">
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+            integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+    />
     <script src="../js/jquery3.4.1.js" defer></script>
     <script src="../js/ajax.js" defer></script>
     <script src="../js/accueuil.js" defer></script>
+    <script src="../js/audio.js" defer></script>
 </head>
 <body>
 
-<?php echo $content_home;?>
+<?php echo $content_home; ?>
 
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

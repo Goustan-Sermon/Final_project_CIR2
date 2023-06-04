@@ -226,35 +226,14 @@ spotify-playlists .list .item .play .fa2 {
 .preview {
     position: fixed;
     bottom: 0;
-    left: 0;
+    left: 230px;
     right: 0;
-    background: linear-gradient(to right, #ae2896, #509bf5);
-    padding: 0.938rem 2.5rem;
-    display: flex;
+    padding: 0.05rem 1rem;
+    background: -webkit-linear-gradient(90deg, #050505,#2b2b2c,#050505);
+    background: linear-gradient(90deg, #050505,#2b2b2c,#050505);
     justify-content: space-between;
 }
-.preview h6 {
-    color: #ffffff;
-    text-transform: uppercase;
-    font-weight: 400;
-    font-size: 0.75rem;
-    margin-bottom: 0.625rem;
-}
-.preview p {
-    color: #ffffff;
-    font-size: 0.875rem;
-    font-weight: 500;
-}
-.preview button {
-    background-color: #ffffff;
-    color: #000000;
-    font-size: 1rem;
-    font-weight: bold;
-    padding: 0.875rem 1.875rem;
-    border: 0rem;
-    border-radius: 2.5rem;
-    cursor: pointer;
-}
+
 .search-box{
     width: fit-content;
     height: fit-content;

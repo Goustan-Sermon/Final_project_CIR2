@@ -1,11 +1,14 @@
 <?php
 ob_start();
 require_once ("../class/User.php");
+require_once ("../class/Playlist.php");
 $user_id=User::Login();
+$info=Playlist::get_playlist_music(1);
+
 
 ?>
 
-    <input id='id_user_home' type='text' style='display: none;' value=<?php echo $user_id ?>>
+    <div id="id"><input id='id_user_home' type='text' style='display: none;' value=<?php echo $user_id ?>></div>
 
 
 <div class="sidebar">
@@ -29,25 +32,23 @@ $user_id=User::Login();
 
 
             <li>
-                <a href="user_my_library.php">
+                <a href="#" id="your_library">
                     <span class="fa fas fa-book"></span>
                     <span>Your Library</span>
                 </a>
             </li>
         </ul>
-    </div>
 
-    <div class="navigation">
         <ul>
             <li>
-                <a href="#">
+                <a id="create_playlist" href="#">
                     <span class="fa fas fa-plus-square"></span>
                     <span>Create Playlist</span>
                 </a>
             </li>
 
-            <li>
-                <a href="#">
+            <li id="liked_song">
+                <a href="">
                     <span class="fa fas fa-heart"></span>
                     <span>Liked Songs</span>
                 </a>
@@ -111,13 +112,15 @@ $user_id=User::Login();
     </div>
 
     <div id='b_playlist' class="spotify-playlists">
-        <h2>Banana Playlists</h2>
+        <h2>Playlists</h2>
         <div class="list cs-hidden" id="autoWidth2"></div>
         <div class="button-container">
             <a class="prev" onclick="scrollToPrev3()">&#10094;</a>
             <a class="next" onclick="scrollToNext3()">&#10095;</a>
         </div>
     </div>
+    <footer id='footer' class="preview">
+    </footer>
 
 
 

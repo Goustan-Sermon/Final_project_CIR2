@@ -117,6 +117,18 @@ class User
                 $statement->bindParam(":mdp", $password);
                 $statement->bindParam(":age", $_POST['Age']);
                 $statement->execute();
+                $idUtilisateur=$dbh->lastInsertId();
+
+                $statement=$dbh->prepare("INSERT INTO public.Playlist (nom_playlist, date_playlist, image_playlist, id_user) 
+                                VALUES ('Liked Titles', CURRENT_DATE, '../image/favoris.jpg', :idUtilisateur)");
+                $statement->bindParam(":idUtilisateur", $idUtilisateur);
+                $statement->execute();
+
+                $statement=$dbh->prepare("INSERT INTO public.Playlist (nom_playlist, date_playlist, image_playlist, id_user) 
+                                VALUES ('The last 10 listens', CURRENT_DATE, '../image/history.jpg', :idUtilisateur)");
+                $statement->bindParam(":idUtilisateur", $idUtilisateur);
+                $statement->execute();
+
             } catch (PDOException $exception) {
                 error_log('Connection error: '.$exception->getMessage());
                 return false;
@@ -124,6 +136,9 @@ class User
            header('Location: index.php');
         }
         return false;
+
+
+
     }
 
     static function logout() {

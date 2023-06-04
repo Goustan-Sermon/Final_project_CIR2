@@ -221,7 +221,7 @@ body {
 
 .playlist-stats span:first-of-type {
     font-weight: 1000;
-    font-family: "Poppins";
+    font-family: "Poppins", sans-serif;
 }
 
 
@@ -267,6 +267,7 @@ body {
 .playlist-buttons {
     display: flex;
     justify-content: space-between;
+    padding-left: 20px;
 }
 
 .playlist-buttons-order {

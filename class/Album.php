@@ -7,7 +7,7 @@ class Album
     static function get_music_by_album($id_playlist){
         try {
             $dbh = Db::connexionBD();
-            $statement = $dbh->prepare("SELECT m.titre_morceau, m.duree, a.nom_artiste, s.style, al.titre_album, al.image_album,al.date_parution
+            $statement = $dbh->prepare("SELECT m.id_morceau,m.titre_morceau, m.duree, a.nom_artiste, s.style, al.titre_album, al.image_album,al.date_parution,m.extrait
 FROM Morceau m
 JOIN Album al ON m.id_album = al.id_album
 JOIN Artiste a ON al.id_artiste = a.id_artiste
