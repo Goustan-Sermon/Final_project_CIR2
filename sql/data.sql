@@ -71,6 +71,6 @@ INSERT INTO morceau_artiste(id_artiste, id_morceau) VALUES (2,9), (2,10), (2,11)
 INSERT INTO morceau_artiste(id_artiste, id_morceau) VALUES (3,15),(3,16),(3,17);
 
 ALTER SEQUENCE playlist_id_playlist_seq RESTART;
-INSERT INTO playlist(nom_playlist, date_playlist, image_playlist, id_user)  VALUES('Banana"s playlist',CURRENT_DATE,'../image/banane.png',1);
+--INSERT INTO playlist(nom_playlist, date_playlist, image_playlist, id_user)  VALUES('Banana"s playlist',CURRENT_DATE,'../image/banane.png',1);
 
-INSERT INTO morceau_playlist(id_morceau, id_playlist) VALUES (1,1), (6,1), (10,1), (3,1), (7,1);
+--INSERT INTO morceau_playlist(id_morceau, id_playlist) VALUES (1,1), (6,1), (10,1), (3,1), (7,1);
