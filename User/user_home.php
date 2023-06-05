@@ -68,6 +68,7 @@ $info=Playlist::get_playlist_music(1);
                         <option value="Album">Album</option>
                         <option value="Artist">Artist</option>
                         <option value="Music">Music</option>
+                        <option value="Style">Style</option>
                     </select>
                 </label>
                 </form>

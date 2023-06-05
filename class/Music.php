@@ -65,5 +65,27 @@ ORDER BY random();");
         }
         return $result;
     }
+    static function style_filter($search){
+        try {
+            $dbh = Db::connexionBD();
 
+            $statement = $dbh->prepare("SELECT a.titre_album, a.date_parution, a.image_album, a.id_album, ar.nom_artiste
+                                            FROM public.album a
+                                            JOIN public.artiste ar ON a.id_artiste = ar.id_artiste
+                                            JOIN public.styles_musicaux st ON a.id_style = st.id_style
+                                            WHERE style ILIKE :search || '%'");
+            $statement->bindParam(':search', $search);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            if(empty($result)){
+
+                return "false";
+            }
+        } catch (PDOException $exception) {
+            error_log('Connection error: '.$exception->getMessage());
+            return false;
+        }
+        return $result;
+    }
 }

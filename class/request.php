@@ -105,6 +105,12 @@ switch ($requestRessource) {
                 $result = Music::music_filter($_GET['search']);
                 break;
         }
+    case 'filtrer_style':
+        switch ($requestMethod) {
+            case 'GET':
+                $result = Music::style_filter($_GET['search']);
+                break;
+        }
         break;
     case 'listenmusic':
         switch ($requestMethod) {

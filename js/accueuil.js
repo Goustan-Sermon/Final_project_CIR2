@@ -78,9 +78,53 @@ $('#loop').click(function (event){
     if(select==='Music'){
         ajaxRequest('GET','../class/request.php/filtrer_music?search='+search,recherche_music)
     }
+    if(select==='Style'){
+        ajaxRequest('GET','../class/request.php/filtrer_style?search='+search,recherche_style)
+    }
 
 })
+function recherche_style(music){
+    let select=$('#Select').val()
+    let search=$('#search').val()
+    $('#autoWidth3').html("")
+    $('#search_result').html("")
+    $('#search_result').append('<h2>Search for "'+search+'" in '+select+'</h2>')
 
+    if (music==="false"){
+        $('#search_result').html("")
+        $('#search_result').append('<h2>There is no '+select+' for "'+search+'"</h2>')
+        return
+    }
+    for (let i=0;i<music.length;i++){
+        $('#autoWidth3').append(
+            '            </div><div class="item">\n' +
+            '                   <img src="'+music[i]['image_album']+'" alt="""album"/>' +
+            '                    <div class="play">\n' +
+            '                        <span class="fa fa-play"><ion-icon style="padding-left: 2px;padding-top: 2px; font-size: 15px" name="play-outline"></ion-icon></span>\n' +
+            '                    </div>\n' +
+            '                    <h4>'+music[i]['titre_album']+'</h4>\n' +
+            '                   <button class="buttons" id="'+music[i]['id_album']+'" style="margin-left: -5px" type="button" value=""><ion-icon name="eye-outline"></ion-icon></button>'+
+            '                </div>')
+    }
+    $('#autoWidth3').append('<div class="button-container">\n' +
+        '            <a class="prev" onclick="scrollToPrev()">&#10094;</a>\n' +
+        '            <a class="next" onclick="scrollToNext()">&#10095;</a>\n' +
+        '        </div>')
+
+    // SI on appuie sur le bouton view (l'oeil) on montre le detail de l'album (artiste song duree etc..)
+    $('.buttons').click(function (event){
+        $('#body').html("")
+        let id_album=$(event.target).closest('.buttons').attr('id');
+        console.log(id_album)
+        if(id_album!==undefined){
+            ajaxRequest('GET','../class/request.php/showmusic/'+id_album,showMusic)
+
+
+        }
+
+
+    })
+}
 //function pour afficher les music en fonction de la recherche
 function recherche_music(music){
 
