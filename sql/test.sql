@@ -1,1 +1,0 @@
-SELECT nom_artiste FROM public.artiste WHERE nom_artiste LIKE '%Tra%';

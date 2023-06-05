@@ -21,7 +21,7 @@ CREATE TABLE public.Utilisateur(
                                    email            VARCHAR (150) NOT NULL ,
                                    mdp              VARCHAR (256) NOT NULL ,
                                    date_naissance   DATE  NOT NULL ,
-                                   photo_profile    VARCHAR (150)   ,
+                                   photo_profile    VARCHAR (256)   ,
                                    CONSTRAINT Utilisateur_PK PRIMARY KEY (id_user)
 )WITHOUT OIDS;
 
@@ -31,9 +31,9 @@ CREATE TABLE public.Utilisateur(
 ------------------------------------------------------------
 CREATE TABLE public.Playlist(
                                 id_playlist      SERIAL NOT NULL ,
-                                nom_playlist     VARCHAR (50) NOT NULL ,
+                                nom_playlist     VARCHAR (256) NOT NULL ,
                                 date_playlist    DATE  NOT NULL ,
-                                image_playlist   VARCHAR (150) NOT NULL ,
+                                image_playlist   VARCHAR (256) NOT NULL ,
                                 id_user          INT  NOT NULL  ,
                                 CONSTRAINT Playlist_PK PRIMARY KEY (id_playlist)
 
@@ -46,7 +46,7 @@ CREATE TABLE public.Playlist(
 ------------------------------------------------------------
 CREATE TABLE public.Types_Artistes(
                                       id_type        SERIAL NOT NULL ,
-                                      type_artiste   VARCHAR (50) NOT NULL  ,
+                                      type_artiste   VARCHAR (256) NOT NULL  ,
                                       CONSTRAINT Types_Artistes_PK PRIMARY KEY (id_type)
 )WITHOUT OIDS;
 
@@ -56,9 +56,9 @@ CREATE TABLE public.Types_Artistes(
 ------------------------------------------------------------
 CREATE TABLE public.Artiste(
                                id_artiste    SERIAL NOT NULL ,
-                               nom_artiste   VARCHAR (50) NOT NULL ,
+                               nom_artiste   VARCHAR (256) NOT NULL ,
                                id_type       INT  NOT NULL  ,
-                               image_artiste VARCHAR (150)  ,
+                               image_artiste VARCHAR (256)  ,
                                CONSTRAINT Artiste_PK PRIMARY KEY (id_artiste)
 
     ,CONSTRAINT Artiste_Types_Artistes_FK FOREIGN KEY (id_type) REFERENCES public.Types_Artistes(id_type)
@@ -70,7 +70,7 @@ CREATE TABLE public.Artiste(
 ------------------------------------------------------------
 CREATE TABLE public.Styles_Musicaux(
                                        id_style   SERIAL NOT NULL ,
-                                       style      VARCHAR (50) NOT NULL  ,
+                                       style      VARCHAR (256) NOT NULL  ,
                                        CONSTRAINT Styles_Musicaux_PK PRIMARY KEY (id_style)
 )WITHOUT OIDS;
 
@@ -80,9 +80,9 @@ CREATE TABLE public.Styles_Musicaux(
 ------------------------------------------------------------
 CREATE TABLE public.Album(
                              id_album        SERIAL NOT NULL ,
-                             titre_album     VARCHAR (50) NOT NULL ,
+                             titre_album     VARCHAR (256) NOT NULL ,
                              date_parution   DATE  NOT NULL ,
-                             image_album     VARCHAR (150) ,
+                             image_album     VARCHAR (256) ,
                              id_artiste      INT  NOT NULL ,
                              id_style        INT  NOT NULL  ,
                              CONSTRAINT Album_PK PRIMARY KEY (id_album)
@@ -97,10 +97,10 @@ CREATE TABLE public.Album(
 ------------------------------------------------------------
 CREATE TABLE public.Morceau(
                                id_morceau      SERIAL NOT NULL ,
-                               titre_morceau   VARCHAR (50) NOT NULL ,
+                               titre_morceau   VARCHAR (256) NOT NULL ,
                                duree           INT  NOT NULL ,
                                id_album        INT  NOT NULL  ,
-                               extrait         VARCHAR (150) NOT NULL ,
+                               extrait         VARCHAR (256) NOT NULL ,
                                CONSTRAINT Morceau_PK PRIMARY KEY (id_morceau)
 
     ,CONSTRAINT Morceau_Album_FK FOREIGN KEY (id_album) REFERENCES public.Album(id_album)
