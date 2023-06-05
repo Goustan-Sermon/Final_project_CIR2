@@ -12,9 +12,8 @@ $info=User::get_info_client($user_id);
 
     <div class="sidebar">
         <a href="user_home.php">
-        <h2 style="color: white; font-size: 2em; text-align: center">Banana Music</h2>
         <div class="logo">
-            <img src="../image/banane.png" alt="Logo" />
+            <img src="../image/logo-removebg-preview-removebg-preview.png" alt="Logo" />
 
         </div>
         </a>
