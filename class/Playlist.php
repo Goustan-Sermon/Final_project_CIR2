@@ -124,5 +124,22 @@ WHERE p.id_playlist = :idPlaylist;");
 
     }
 
+    static function history($id,$music)
+    {
+
+        try {
+            $conn = Db::connexionBD();
+            $statement = $conn->prepare('SELECT COUNT(*) FROM playlist WHERE id_user=:id_user AND id_playlist=:id_playlist');
+            $statement->bindParam(':id_music', $music);
+            $statement->bindParam(':id_playlist', $playlist);
+            $statement->execute();
+        } catch (PDOException $exception) {
+            error_log('Request error: ' . $exception->getMessage());
+            return false;
+        }
+        return true;
+    }
+
+
 
 }

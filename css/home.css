@@ -146,20 +146,20 @@ body {
     color: black;
     padding: 0.5rem 0.5rem;
 }
-.spotify-playlists {
+.banana-playlist {
     padding: 1.25rem 2.5rem;
 }
-.spotify-playlists h2 {
+.banana-playlist h2 {
     color: #ffffff;
     font-size: 2.5rem;
     margin-bottom: 1.25rem;
 }
-.spotify-playlists .list {
+.banana-playlist .list {
     display: flex;
     gap: 1.25rem;
     overflow: hidden;
 }
-.spotify-playlists .list .item {
+.banana-playlist .list .item {
     min-width: 8.75rem;
     width: 10rem;
     padding: 0.938rem;
@@ -168,19 +168,19 @@ body {
     cursor: pointer;
     transition: all ease 0.4s;
 }
-.spotify-playlists .list .item:hover {
+.banana-playlist .list .item:hover {
     background-color: #252525;
 }
-.spotify-playlists .list .item img {
+.banana-playlist .list .item img {
     max-width: 150px;
     max-height: 150px;
     border-radius: 0.375rem;
     margin-bottom: 0.625rem;
 }
-.spotify-playlists .list .item .play {
+.banana-playlist .list .item .play {
     position: relative;
 }
-.spotify-playlists .list .item .play .fa {
+.banana-playlist .list .item .play .fa {
     position: absolute;
     right: 0.625rem;
     top: -12.75rem;
@@ -190,21 +190,12 @@ body {
     opacity: 0;
     transition: all ease 0.4s;
 }
-spotify-playlists .list .item .play .fa2 {
-    position: absolute;
-    right: 0.625rem;
-    top: -12.75rem;
-    padding: 0.625rem;
-    background-color: #1db954;
-    border-radius: 100%;
-    opacity: 0;
-    transition: all ease 0.4s;
-}
-.spotify-playlists .list .item:hover .play .fa-play {
+
+.banana-playlist .list .item:hover .play .fa-play {
     opacity: 1;
     transform: translateY(-1.00rem);
 }
-.spotify-playlists .list .item h4 {
+.banana-playlist .list .item h4 {
     color: #ffffff;
     font-size: 0.875rem;
     margin-bottom: 0.625rem;
@@ -212,13 +203,13 @@ spotify-playlists .list .item .play .fa2 {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.spotify-playlists .list .item p {
+.banana-playlist .list .item p {
     color: #989898;
     font-size: 0.75rem;
     line-height: 1.25rem;
     font-weight: 600;
 }
-.spotify-playlists hr {
+.banana-playlist hr {
     margin: 4.375rem 0rem 0rem;
     border-color: #636363;
 }

@@ -22,10 +22,7 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
     />
-    <script src="../js/jquery3.4.1.js" defer></script>
-    <script src="../js/ajax.js" defer></script>
-    <script src="../js/accueuil.js" defer></script>
-    <script src="../js/audio.js" defer></script>
+
 </head>
 <body>
 

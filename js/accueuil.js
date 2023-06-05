@@ -9,18 +9,17 @@ ajaxRequest('GET','../class/request.php/music/',displayMusic) // Affiche toutes 
 ajaxRequest('GET','../class/request.php/album/'+id,displayAlbum) // Affiche tout les album
 
 // Si le lien Create playlist est cliquer
+
+
 $('#create_playlist').click(function(){
 
     // On vide la page
     $('#body').html("")
     // et on affiche le form pour creer une playlist
-    $('#body').append('<div id="b_playlist" class="spotify-playlists">' +
+    $('#body').append('<div id="b_playlist" class="banana-playlist">' +
         '                <div class="list cs-hidden" id="Create">' +
         '                   <div class="item">\n' +
         '                    <img src="../image/banane.png" alt="banane"/>\n' +
-        '                    <div class="play">\n' +
-        '                        <span class="fa fa-play"><ion-icon style="padding-left: 2px;padding-top: 2px; font-size: 15px" name="play-outline"></ion-icon></span>\n' +
-        '                    </div>\n' +
         '                    <label for="nom_playlist"><h3 style="color: white">New playlist</h3></label><br>\n' +
         '                    <input type="text" id="nom_playlist" name="nom" required ><br><br>\n' +
         '                    <div style="display: inline-flex;justify-content: space-between;" >   '+
@@ -47,7 +46,7 @@ $('#your_library').click(function (event){
 
     $('#body').html("")
     $('#body').append('<div class="main-container" id="body">' +
-        '               <div id="b_playlist" class="spotify-playlists">\n' +
+        '               <div id="b_playlist" class="banana-playlist">\n' +
         '        <h2>My Library</h2>\n' +
         '        <div class="list cs-hidden" id="autoWidth2"></div>\n' +
         '        <div class="button-container">\n' +
@@ -70,7 +69,7 @@ $('#loop').click(function (event){
      let search=$('#search').val()
 
 //On fait une recherche en fonction du select
-    if (select==='Artiste'){
+    if (select==='Artist'){
         ajaxRequest('GET','../class/request.php/filter_artiste?search='+search,recherche_artiste);
     }
     if (select==='Album'){
@@ -102,9 +101,6 @@ function recherche_music(music){
             '            ' +
             '                <div class="item">\n' +
             '                    <img src="'+music[i]['image_album']+'" alt="album"/>\n' +
-            '                    <div class="play">\n' +
-            '                        <span class="fa fa-play"><ion-icon style="padding-left: 2px;padding-top: 2px; font-size: 15px" name="play-outline"></ion-icon></span>\n' +
-            '                    </div>\n' +
             '                    <h4>'+music[i]['titre_morceau']+'</h4>\n' +
             '                    <p>'+music[i]['nom_artiste']+'</p>\n' +
             '                    <div style="display: inline-flex;justify-content: space-between;" >   '+
@@ -119,6 +115,7 @@ function recherche_music(music){
 
     // Si on clique sur le bouton play on peux jouer la musique
     $('.button_music').click(function (event){
+        console.log('aa')
         $('#footer').html("")
         let id_music=$(event.target).closest('.button_music').attr('id');
         if(id_music!==undefined){
@@ -151,9 +148,6 @@ function recherche_album(music){
         $('#autoWidth3').append(
             '            </div><div class="item">\n' +
             '                   <img src="'+music[i]['image_album']+'" alt="""album"/>' +
-            '                    <div class="play">\n' +
-            '                        <span class="fa fa-play"><ion-icon style="padding-left: 2px;padding-top: 2px; font-size: 15px" name="play-outline"></ion-icon></span>\n' +
-            '                    </div>\n' +
             '                    <h4>'+music[i]['titre_album']+'</h4>\n' +
             '                   <button class="buttons" id="'+music[i]['id_album']+'" style="margin-left: -5px" type="button" value=""><ion-icon name="eye-outline"></ion-icon></button>'+
             '                </div>')
@@ -197,9 +191,6 @@ function recherche_artiste(music){
         $('#autoWidth3').append(
             '            </div><div class="item">\n' +
             '                   <img src="'+music[i]['image_artiste']+'" alt="artiste"/>' +
-            '                    <div class="play">\n' +
-            '                        <span class="fa fa-play"><ion-icon style="padding-left: 2px;padding-top: 2px; font-size: 15px" name="play-outline"></ion-icon></span>\n' +
-            '                    </div>\n' +
             '                    <h4>'+music[i]['nom_artiste']+'</h4>\n' +
             '                   <button class="buttons_artiste" id="'+music[i]['id_artiste']+'" style="margin-left: -5px" type="button" value=""><ion-icon name="eye-outline"></ion-icon></button>'+
             '                </div>')
@@ -244,7 +235,7 @@ function show_artiste(album){
         '                </div>\n' +
         '            </div>\n' +
         '        </div>' +
-        '<div class="main-container" id="body"> <div class="spotify-playlists">\n' +
+        '<div class="main-container" id="body"> <div class="banana-playlist">\n' +
 
         '        <div class="list cs-hidden" >\n' +
         '            <div id="scrollable-content">\n' +
@@ -264,9 +255,6 @@ function show_artiste(album){
         $('#autoWidth').append('' +
             '                <div class="item">\n' +
             '                    <img src="'+album[i]['image_album']+'" alt="album"/>\n' +
-            '                    <div class="play">\n' +
-            '                        <span class="fa fa-play"><ion-icon style="padding-left: 2px;padding-top: 2px; font-size: 15px" name="play-outline"></ion-icon></span>\n' +
-            '                    </div>\n' +
             '                    <h4>'+album[i]['titre_album']+'</h4>\n' +
             '                    <p>'+album[i]['nom_artiste']+'</p>\n' +
             '                   <button class="buttons" id="'+album[i]['id_album']+'" style="margin-left: -5px" type="button" value=""><ion-icon name="eye-outline"></ion-icon></button>'+
@@ -309,9 +297,6 @@ function displayAlbum(album){
         $('#autoWidth').append('' +
             '                <div class="item">\n' +
             '                    <img src="'+album[i]['image_album']+'" alt="album"/>\n' +
-            '                    <div class="play">\n' +
-            '                        <span class="fa fa-play"><ion-icon style="padding-left: 2px;padding-top: 2px; font-size: 15px" name="play-outline"></ion-icon></span>\n' +
-            '                    </div>\n' +
             '                    <h4>'+album[i]['titre_album']+'</h4>\n' +
             '                    <p class="artiste buttons_artiste" id="'+album[i]['id_artiste']+'">'+album[i]['nom_artiste']+'</p>\n' +
             '                    <p>'+date+'</p>\n' +
@@ -359,7 +344,7 @@ function showMusic(music) {
             '            <img src="' + music[i].image_album + '" alt="">\n' +
             '        </div>\n' +
             '        <div class="song-name-album">\n' +
-            '            <div class="song-name">' + music[i].titre_morceau + '</div>\n' +
+            '            <div class="song-Ffaname">' + music[i].titre_morceau + '</div>\n' +
             '            <div class="song-artist">' + music[i].nom_artiste + '</div>\n' +
             '        </div>\n' +
             '    </td>\n' +
@@ -709,7 +694,7 @@ function displayAddPlaylist(playlist){
         }
     }
 
-    let content='<div id="b_playlist" class="spotify-playlists">' +
+    let content='<div id="b_playlist" class="banana-playlist">' +
 
         '           <h2>Playlists</h2>' +
         '               <div class="list cs-hidden" id="autoWidth2">'
@@ -772,9 +757,11 @@ function showMusic_playlist(playlist){
                 '    <td class="song-album">' + playlist[i].titre_album + '</td>\n' +
                 '    <td class="song-date-added">' + playlist[i].date_parution + '</td>\n' +
                 '    <td class="song-duration">' + date + '</td>\n' +
-                '    <td class="play_music"><button class="button_music" id="' + playlist[i]['id_morceau'] + '" style="margin-left: -5px" type="button" value=""><ion-icon name="play-outline"></ion-icon></td>' +
-                '    <td class="play_music"><button class="button_trash" id="' + playlist[i]['id_morceau'] + '" style="margin-left: -5px" type="button" value=""><ion-icon name="heart-dislike-outline"></ion-icon></td>' +
-                '</tr>\n';
+                '    <td class="play_music"><button class="button_music" id="' + playlist[i]['id_morceau'] + '" style="margin-left: -5px" type="button" value=""><ion-icon name="play-outline"></ion-icon></td>'
+                        if(playlist[i].nom_playlist!=='The last 10 listens') {
+                            tableRows+='<td class="play_music"><button class="button_trash" id="' + playlist[i]['id_morceau'] + '" style="margin-left: -5px" type="button" value=""><ion-icon name="heart-dislike-outline"></ion-icon></td>' +
+
+                '</tr>\n';}
         }
 
 

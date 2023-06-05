@@ -66,7 +66,7 @@ $info=Playlist::get_playlist_music(1);
                     <input type="text" id="search" class="input-search" placeholder="Type to Search...">
                     <select id="Select">
                         <option value="Album">Album</option>
-                        <option value="Artiste">Artist</option>
+                        <option value="Artist">Artist</option>
                         <option value="Music">Music</option>
                     </select>
                 </label>
@@ -84,7 +84,7 @@ $info=Playlist::get_playlist_music(1);
         </div>
     </div>
 
-    <div class="spotify-playlists">
+    <div class="banana-playlist">
         <div id="search_result"></div>
         <div class="list cs-hidden" id="autoWidth3">
 
@@ -92,31 +92,34 @@ $info=Playlist::get_playlist_music(1);
 
     </div>
 
-    <div class="spotify-playlists">
+    <div class="banana-playlist">
         <h2>Album</h2>
-        <div class="list cs-hidden" id="autoWidth"></div>
         <div class="button-container">
             <a class="prev" onclick="scrollToPrev()">&#10094;</a>
             <a class="next" onclick="scrollToNext()">&#10095;</a>
         </div>
+        <div class="list cs-hidden" id="autoWidth"></div>
+
     </div>
 
-    <div class="spotify-playlists">
+    <div class="banana-playlist">
         <h2>Music</h2>
-        <div class="list cs-hidden" id="autoWidth1"></div>
         <div class="button-container">
             <a class="prev" onclick="scrollToPrev2()">&#10094;</a>
             <a class="next" onclick="scrollToNext2()">&#10095;</a>
         </div>
+        <div class="list cs-hidden" id="autoWidth1"></div>
+
     </div>
 
-    <div  id='b_playlist' class="spotify-playlists">
+    <div  id='b_playlist' class="banana-playlist">
         <h2>Playlists</h2>
-        <div class="list cs-hidden" id="autoWidth2"></div>
         <div class="button-container">
             <a class="prev" onclick="scrollToPrev3()">&#10094;</a>
             <a class="next" onclick="scrollToNext3()">&#10095;</a>
         </div>
+        <div class="list cs-hidden" id="autoWidth2"></div>
+
     </div>
     <br><br><br><br><br>
 
@@ -126,7 +129,10 @@ $info=Playlist::get_playlist_music(1);
     </footer>
 
 
-
+    <script src="../js/jquery3.4.1.js" defer></script>
+    <script src="../js/ajax.js" defer></script>
+    <script src="../js/accueuil.js" defer></script>
+    <script src="../js/audio.js" defer></script>
     <script src="../js/carousel.js"></script>
 <?php
 $content_home = ob_get_clean();

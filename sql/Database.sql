@@ -132,5 +132,8 @@ CREATE TABLE public.Morceau_Artiste(
     ,CONSTRAINT Morceau_Artiste_Morceau0_FK FOREIGN KEY (id_morceau) REFERENCES public.Morceau(id_morceau)
 )WITHOUT OIDS;
 
+INSERT INTO morceau_playlist(id_morceau, id_playlist) VALUES (3,2);
+INSERT INTO morceau_playlist(id_morceau, id_playlist) VALUES (200,2);
+
 
 

@@ -1,4 +1,4 @@
-.spotify-playlists {
+.banana-playlist {
     width: 93%;
     margin: 0 auto;
     text-align: center;
@@ -27,32 +27,13 @@
     height: auto;
 }
 
-.play {
-    background-color: rgba(0, 0, 0, 0.7);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    cursor: pointer;
-}
-
-.play:hover {
-    opacity: 1;
-}
-
-.fa-play {
-    color: white;
-    font-size: 0.1em;
-}
 
 h4, p {
     margin: 10px 0;
 }
 
 .button-container {
-    position: absolute;
+    position: relative;
     top: 0;
     right: 0;
     display: flex;

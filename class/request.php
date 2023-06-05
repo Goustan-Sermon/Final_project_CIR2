@@ -113,6 +113,12 @@ switch ($requestRessource) {
                 break;
         }
         break;
+    case 'history':
+        switch ($requestMethod){
+            case 'POST':
+                $result=Playlist::history($id,$_POST['music']);
+
+        }
 
 }
 
