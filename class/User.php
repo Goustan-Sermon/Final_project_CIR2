@@ -51,9 +51,10 @@ class User
         return false;
     }
 
+    /* creation du compte*/
     static function register() {
 
-
+        // Verifie si tout les champs sont pas vides et qu'il n'y a aucun probleme
         if (!empty($_POST)) {
             if(empty($_POST['firstName'])) {
                 return 'Fill the first name field !';
@@ -89,6 +90,7 @@ class User
                 return 'Passwords do not fit !';
             }
 
+            // Verifie si l'eamil existe deja
             try {
                 $dbh = Db::connexionBD();
 
@@ -106,10 +108,12 @@ class User
                 return 'The email address already exist !';
             }
 
+            // si tout es ok alors on creer le nouveau user
             try {
                 $statement = $dbh->prepare("INSERT INTO public.Utilisateur(nom, prenom, email, mdp,date_naissance,photo_profile) 
                                                 VALUES (:nom, :prenom, :email, :mdp,:age,'../image/default_profil.png')");
 
+                //crypte les mdp
                 $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
                 $statement->bindParam(":nom", $_POST['lastName']);
                 $statement->bindParam(":prenom", $_POST['firstName']);
@@ -119,6 +123,7 @@ class User
                 $statement->execute();
                 $idUtilisateur=$dbh->lastInsertId();
 
+                // on leur creer 2 playlist par defaut associer à leur id (favoris et les 10 dernieres ecoutes)
                 $statement=$dbh->prepare("INSERT INTO public.Playlist (nom_playlist, date_playlist, image_playlist, id_user) 
                                 VALUES ('Liked Titles', CURRENT_DATE, '../image/favoris.jpg', :idUtilisateur)");
                 $statement->bindParam(":idUtilisateur", $idUtilisateur);
@@ -141,12 +146,13 @@ class User
 
     }
 
+    /* pour se ddeconnecter*/
     static function logout() {
         unset($_SESSION['id_user']);
         header('Location: index.php');
     }
 
-
+    /* recupere toute les infos d'un user */
     static function get_info_client($user_id)
     {
         try {
@@ -161,10 +167,15 @@ class User
         }
     }
 
+    /*
+     * Update les infos du user
+     */
     static function update_info($id, $prenom, $nom,$email,$date)
         {
             $error=array();
 
+
+            /* on verifie si chaque champ et rempli et ne comporte pas de problème*/
             if (!empty($_POST)) {
                 if (empty($_POST['firstName'])) {
                     array_push($error, 'Fill the first name field !');
@@ -202,6 +213,7 @@ class User
 
             }
 
+            /* ON verifie si le mail n'existe pas deja*/
             try{
                 $dbh=Db::connexionBD();
                 $statement = $dbh->prepare("SELECT email FROM public.utilisateur
@@ -219,6 +231,8 @@ class User
                 array_push($error,'The email already exist');
                 return $error;
             }
+
+            // si tout est ok on fait les changements
             try
             {
                 $dbh=Db::connexionBD();

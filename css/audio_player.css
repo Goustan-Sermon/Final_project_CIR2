@@ -60,10 +60,7 @@ i:hover{
     -webkit-line-clamp: 1;
     overflow: hidden;
 }
-.title:hover,
-.artist:hover {
-    text-decoration: underline;
-}
+
 .artist{
     color: var(--secondary-color);
 }
@@ -147,15 +144,4 @@ i:hover{
 }
 .volume-bar .progress-bar:hover .progress::after{
     --size: .8em;
-}
-
-.fa-heart.clicked{
-
-    color:red;
-
-}
-
-.fa-heart{
-    font-size: 2em;
-    transition: color 0.3s;
 }

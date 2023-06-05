@@ -27,11 +27,11 @@ WHERE al.id_album = :id_album;
 
         try {
             $dbh = Db::connexionBD();
-            $statement = $dbh->prepare("SELECT Album.id_album,Album.titre_album, Artiste.nom_artiste, Album.image_album, SUM(Morceau.duree) AS duree_totale
+            $statement = $dbh->prepare("SELECT artiste.id_artiste, Album.id_album,Album.titre_album, Artiste.nom_artiste, Album.image_album, SUM(Morceau.duree) AS duree_totale
 FROM Album
 JOIN Artiste ON Album.id_artiste = Artiste.id_artiste
 JOIN Morceau ON Album.id_album = Morceau.id_album
-GROUP BY Album.id_album, Album.titre_album, Artiste.nom_artiste, Album.image_album");
+GROUP BY Album.id_album, Album.titre_album, Artiste.nom_artiste,artiste.id_artiste, Album.image_album");
             $statement->execute();
             return $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $exception) {

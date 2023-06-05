@@ -29,6 +29,7 @@ WHERE m.id_morceau =:id_music;");
     Morceau.id_morceau,   
     Morceau.titre_morceau,
     Artiste.nom_artiste,
+    Artiste.id_artiste,
     Morceau.duree,
     Album.image_album
 FROM

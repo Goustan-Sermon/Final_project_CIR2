@@ -1,17 +1,23 @@
+/* On Recupere l'id de la session connecter*/
+
 let id=document.getElementById('id_user_home').value
-ajaxRequest('GET','../class/request.php/playlist/'+id,displayPlaylist)
-ajaxRequest('GET','../class/request.php/playlist/'+id,displayLiked)
-ajaxRequest('GET','../class/request.php/music/',displayMusic)
-ajaxRequest('GET','../class/request.php/album/'+id,displayAlbum)
 
+/* Requete ajax pour tout l'affichage de la page d'accueil */
+ajaxRequest('GET','../class/request.php/playlist/'+id,displayPlaylist) // les playlist
+ajaxRequest('GET','../class/request.php/playlist/'+id,displayLiked) // Titre liker (LIEN NAVBAR)
+ajaxRequest('GET','../class/request.php/music/',displayMusic) // Affiche toutes les musics
+ajaxRequest('GET','../class/request.php/album/'+id,displayAlbum) // Affiche tout les album
 
-$('#create_playlist').click(function(event){
+// Si le lien Create playlist est cliquer
+$('#create_playlist').click(function(){
 
+    // On vide la page
     $('#body').html("")
+    // et on affiche le form pour creer une playlist
     $('#body').append('<div id="b_playlist" class="spotify-playlists">' +
         '                <div class="list cs-hidden" id="Create">' +
         '                   <div class="item">\n' +
-        '                    <img src="../image/banane.png" />\n' +
+        '                    <img src="../image/banane.png" alt="banane"/>\n' +
         '                    <div class="play">\n' +
         '                        <span class="fa fa-play"><ion-icon style="padding-left: 2px;padding-top: 2px; font-size: 15px" name="play-outline"></ion-icon></span>\n' +
         '                    </div>\n' +
@@ -21,18 +27,22 @@ $('#create_playlist').click(function(event){
         '                   <button style="margin: 10px;width: 40px;" class="button_music" id="create" style="margin-left: -5px" type="button" value="">New</button>'+
         '                  </div> </div></div></div>')
 
-
+    // Si on appuie sur le bouton new on envoie le form
     $('#create').click(function (event){
+        //POur pas recharger la page
         event.preventDefault()
         let nom= $('#nom_playlist').val()
-        window.location.href='../User/user_home.php'
+        window.location.href='../User/user_home.php' // on redirect qur la page d'accueil recharger la permet de remettre sur la page d'acceuil
+
+        // requete pour creer une playlist et l'afficher
         ajaxRequest('POST','../class/request.php/playlist_music/'+id,()=>{
             ajaxRequest('GET','../class/request.php/playlist/'+id,displayPlaylist)
         },'nom='+nom)
     })
 })
+
+//Si on clique sur 'Your library' on affiche toute les playlists
 $('#your_library').click(function (event){
-    console.log('aaaa')
     event.preventDefault()
 
     $('#body').html("")
@@ -46,47 +56,43 @@ $('#your_library').click(function (event){
         '        </div>\n' +
         '           </div>'+
         '    </div>')
-    ajaxRequest('GET','../class/request.php/playlist/'+id,displayPlaylist)
+    ajaxRequest('GET','../class/request.php/playlist/'+id,displayPlaylist) // on reutilise la requete avec display playlist
 
 })
 
 
-
-
-
-
+// Si on clique sur la loop pour rechercher
 $('#loop').click(function (event){
 
     event.preventDefault()
-    let select=''
-    let search=''
-     select=$('#Select').val()
-     search=$('#search').val()
 
+     let select=$('#Select').val()
+     let search=$('#search').val()
 
+//On fait une recherche en fonction du select
     if (select==='Artiste'){
         ajaxRequest('GET','../class/request.php/filter_artiste?search='+search,recherche_artiste);
     }
     if (select==='Album'){
         ajaxRequest('GET','../class/request.php/filtrer_album?search='+search,recherche_album)
     }
-    if(select=='Music'){
+    if(select==='Music'){
         ajaxRequest('GET','../class/request.php/filtrer_music?search='+search,recherche_music)
     }
 
 })
 
+//function pour afficher les music en fonction de la recherche
 function recherche_music(music){
 
-    let select=''
-    let search=''
-    select=$('#Select').val()
-    search=$('#search').val()
+
+    let select=$('#Select').val()
+    let search=$('#search').val()
     $('#autoWidth3').html("")
     $('#search_result').html("")
     $('#search_result').append('<h2>Search for "'+search+'" in '+select+'</h2>')
 
-    if (music=="false"){
+    if (music==="false"){
         $('#search_result').html("")
         $('#search_result').append('<h2>There is no '+select+' for "'+search+'"</h2>')
         return
@@ -95,7 +101,7 @@ function recherche_music(music){
         $('#autoWidth3').append(
             '            ' +
             '                <div class="item">\n' +
-            '                    <img src="'+music[i]['image_album']+'" />\n' +
+            '                    <img src="'+music[i]['image_album']+'" alt="album"/>\n' +
             '                    <div class="play">\n' +
             '                        <span class="fa fa-play"><ion-icon style="padding-left: 2px;padding-top: 2px; font-size: 15px" name="play-outline"></ion-icon></span>\n' +
             '                    </div>\n' +
@@ -111,10 +117,10 @@ function recherche_music(music){
         '            <a class="next" onclick="scrollToNext()">&#10095;</a>\n' +
         '        </div>')
 
+    // Si on clique sur le bouton play on peux jouer la musique
     $('.button_music').click(function (event){
         $('#footer').html("")
         let id_music=$(event.target).closest('.button_music').attr('id');
-        console.log(id_music)
         if(id_music!==undefined){
             ajaxRequest('GET','../class/request.php/listenmusic/'+id_music,music_player);
         }
@@ -126,16 +132,17 @@ function recherche_music(music){
 
 
 }
+
+//function pour afficher tous les albums en fonction de la recherche
 function recherche_album(music){
-    let select=''
-    let search=''
-    select=$('#Select').val()
-    search=$('#search').val()
+
+    let select=$('#Select').val()
+    let search=$('#search').val()
     $('#autoWidth3').html("")
     $('#search_result').html("")
     $('#search_result').append('<h2>Search for "'+search+'" in '+select+'</h2>')
 
-    if (music=="false"){
+    if (music==="false"){
         $('#search_result').html("")
         $('#search_result').append('<h2>There is no '+select+' for "'+search+'"</h2>')
         return
@@ -143,7 +150,7 @@ function recherche_album(music){
     for (let i=0;i<music.length;i++){
         $('#autoWidth3').append(
             '            </div><div class="item">\n' +
-            '                   <img src="'+music[i]['image_album']+'" />' +
+            '                   <img src="'+music[i]['image_album']+'" alt="""album"/>' +
             '                    <div class="play">\n' +
             '                        <span class="fa fa-play"><ion-icon style="padding-left: 2px;padding-top: 2px; font-size: 15px" name="play-outline"></ion-icon></span>\n' +
             '                    </div>\n' +
@@ -155,6 +162,8 @@ function recherche_album(music){
         '            <a class="prev" onclick="scrollToPrev()">&#10094;</a>\n' +
         '            <a class="next" onclick="scrollToNext()">&#10095;</a>\n' +
         '        </div>')
+
+    // SI on appuie sur le bouton view (l'oeil) on montre le detail de l'album (artiste song duree etc..)
     $('.buttons').click(function (event){
         $('#body').html("")
         let id_album=$(event.target).closest('.buttons').attr('id');
@@ -168,6 +177,8 @@ function recherche_album(music){
 
     })
 }
+
+// function pour afficher les artiste en fonction de la recherche
 function recherche_artiste(music){
     let select=''
     let search=''
@@ -177,7 +188,7 @@ function recherche_artiste(music){
     $('#search_result').html("")
     $('#search_result').append('<h2>Search for "'+search+'" in '+select+'</h2>')
 
-    if (music=="false"){
+    if (music==="false"){
         $('#search_result').html("")
         $('#search_result').append('<h2>There is no artiste for "'+search+'"</h2>')
         return
@@ -185,7 +196,7 @@ function recherche_artiste(music){
     for (let i=0;i<music.length;i++){
         $('#autoWidth3').append(
             '            </div><div class="item">\n' +
-            '                   <img src="'+music[i]['image_artiste']+'" />' +
+            '                   <img src="'+music[i]['image_artiste']+'" alt="artiste"/>' +
             '                    <div class="play">\n' +
             '                        <span class="fa fa-play"><ion-icon style="padding-left: 2px;padding-top: 2px; font-size: 15px" name="play-outline"></ion-icon></span>\n' +
             '                    </div>\n' +
@@ -197,6 +208,8 @@ function recherche_artiste(music){
         '            <a class="prev" onclick="scrollToPrev()">&#10094;</a>\n' +
         '            <a class="next" onclick="scrollToNext()">&#10095;</a>\n' +
         '        </div>')
+
+    // SI on clique sur l'oeil on azffiche les info de l'artiste et tout ses album
     $('.buttons_artiste').click(function (event){
         $('#body').html("")
         let id_artiste=$(event.target).closest('.buttons_artiste').attr('id');
@@ -210,9 +223,11 @@ function recherche_artiste(music){
     })
 }
 
+
+// function pour afficher les info de l'artiste
 function show_artiste(album){
 
-    var content = '<div class="container">\n' +
+    let content = '<div class="container">\n' +
         '    <div class="right">\n' +
         '        <div class="playlist-header">\n' +
         '            <div class="playlist-top">\n' +
@@ -248,7 +263,7 @@ function show_artiste(album){
     for(let i=0;i<album.length;i++){
         $('#autoWidth').append('' +
             '                <div class="item">\n' +
-            '                    <img src="'+album[i]['image_album']+'" />\n' +
+            '                    <img src="'+album[i]['image_album']+'" alt="album"/>\n' +
             '                    <div class="play">\n' +
             '                        <span class="fa fa-play"><ion-icon style="padding-left: 2px;padding-top: 2px; font-size: 15px" name="play-outline"></ion-icon></span>\n' +
             '                    </div>\n' +
@@ -257,6 +272,7 @@ function show_artiste(album){
             '                   <button class="buttons" id="'+album[i]['id_album']+'" style="margin-left: -5px" type="button" value=""><ion-icon name="eye-outline"></ion-icon></button>'+
             '                </div>')}
 
+    // Meme principe avec les albums on affiche leur contenue
     $('.buttons').click(function (event){
         $('#body').html("")
         let id_album=$(event.target).closest('.buttons').attr('id');
@@ -275,6 +291,8 @@ function show_artiste(album){
 
 }
 
+
+//function pour affiche tout les album
 function displayAlbum(album){
 
 
@@ -290,16 +308,16 @@ function displayAlbum(album){
 
         $('#autoWidth').append('' +
             '                <div class="item">\n' +
-            '                    <img src="'+album[i]['image_album']+'" />\n' +
+            '                    <img src="'+album[i]['image_album']+'" alt="album"/>\n' +
             '                    <div class="play">\n' +
             '                        <span class="fa fa-play"><ion-icon style="padding-left: 2px;padding-top: 2px; font-size: 15px" name="play-outline"></ion-icon></span>\n' +
             '                    </div>\n' +
             '                    <h4>'+album[i]['titre_album']+'</h4>\n' +
-            '                    <p>'+album[i]['nom_artiste']+'</p>\n' +
+            '                    <p class="artiste buttons_artiste" id="'+album[i]['id_artiste']+'">'+album[i]['nom_artiste']+'</p>\n' +
             '                    <p>'+date+'</p>\n' +
             '                   <button class="buttons" id="'+album[i]['id_album']+'" style="margin-left: -5px" type="button" value=""><ion-icon name="eye-outline"></ion-icon></button>'+
             '                </div>')}
-
+            // quand on a^puie sur l'oeil ça affiche le contenu d'un album (ses musique artiste,durée style)
         $('.buttons').click(function (event){
             $('#body').html("")
             let id_album=$(event.target).closest('.buttons').attr('id');
@@ -309,18 +327,25 @@ function displayAlbum(album){
 
 
         }
+        })
+    $('.buttons_artiste').click(function (event){
+        $('#body').html("")
+        let id_artiste=$(event.target).closest('.buttons_artiste').attr('id');
+        console.log(id_artiste)
+        if(id_artiste!==undefined){
 
-
-})
+            ajaxRequest('GET','../class/request.php/showartiste/'+id_artiste,show_artiste)
+        }
+    })
 }
 
-
+// function pour affiche toute les musique d'une album / playlist sous forme de tableau
 function showMusic(music) {
     console.log(music);
 
-    var tableRows = '';
+    let tableRows = '';
 
-    for (var i = 0; i < music.length; i++) {
+    for (let i = 0; i < music.length; i++) {
         let minutes=Math.floor(music[i]['duree']/60)
         let seconde=Math.floor(music[i]['duree']%60)
         // Formatage des minutes et des secondes avec deux chiffres
@@ -342,6 +367,7 @@ function showMusic(music) {
             '    <td class="song-date-added">' + music[i].date_parution + '</td>\n' +
             '    <td class="song-duration">' + date + '</td>\n' +
             '    <td class="play_music"><button class="button_music" id="'+music[i]['id_morceau']+'" style="margin-left: -5px" type="button" value=""><ion-icon name="play-outline"></ion-icon></td>' +
+            '    <td class="play_music"><button class="button_add" id="'+music[i]['id_morceau']+'" style="margin-left: -5px" type="button" value=""><ion-icon name="add-outline"></ion-icon></td>' +
             '</tr>\n';
 
 
@@ -349,7 +375,7 @@ function showMusic(music) {
 
     }
 
-    var content = '<div class="container">\n' +
+    let content = '<div class="container">\n' +
         '    <div class="right">\n' +
         '        <div class="playlist-header">\n' +
         '            <div class="playlist-top">\n' +
@@ -380,6 +406,9 @@ function showMusic(music) {
         '                        <th>\n' +
         '                            <div style="width: 150%;"><ion-icon name="musical-notes-outline"></ion-icon></div>\n' +
         '                        </th>\n' +
+        '                        <th>\n' +
+        '                            <div style="width: 150%;"><ion-icon name="musical-notes-outline"></ion-icon></div>\n' +
+        '                        </th>\n' +
         '                    </tr>\n' +
         tableRows +
         '                </table>\n' +
@@ -391,17 +420,20 @@ function showMusic(music) {
 
     document.getElementById("body").innerHTML = content;
 
+    // si on clique sur le  bouton play on joue la musique
     $('.button_music').click(function (event){
         $('#footer').html("")
         let id_music=$(event.target).closest('.button_music').attr('id');
         console.log(id_music)
         if(id_music!==undefined){
             ajaxRequest('GET','../class/request.php/listenmusic/'+id_music,music_player);
-
-
         }
-
-
+    })
+    $('.button_add').click(function (event){
+        let id_music=$(event.target).closest('.button_add').attr('id');
+        $('#body').html("")
+        $('#body').append('<input id="id_music" type="text" style="display: none;" value="'+id_music+'">')
+        ajaxRequest('GET','../class/request.php/playlist/'+id,displayAddPlaylist);
     })
 
 
@@ -409,9 +441,7 @@ function showMusic(music) {
 
 
 
-
-
-
+//fonction pour afficher toute les musiques
 function displayMusic(music){
 
     console.log(music)
@@ -426,9 +456,9 @@ function displayMusic(music){
 
     $('#autoWidth1').append(
         '                <div class="item">\n' +
-        '                    <img src="'+music[i]['image_album']+'" />\n' +
+        '                    <img src="'+music[i]['image_album']+'" alt="album"/>\n' +
         '                    <h4>'+music[i]['titre_morceau']+'</h4>\n' +
-        '                    <p>'+music[i]['nom_artiste']+'</p>\n' +
+        '                    <p class="artiste buttons_artiste" id="'+music[i]['id_artiste']+'">'+music[i]['nom_artiste']+'</p>\n' +
         '                    <p>'+date+'</p>\n' +
         '                    <form action="" method="post" style="display: inline-flex;justify-content: space-between;" >   '+
         '                   <button style="margin: 10px;width: 40px;" class="button_music" id="'+music[i]['id_morceau']+'" style="margin-left: -5px" type="button" value=""><ion-icon name="play-outline"></ion-icon>' + '</button>'+
@@ -436,6 +466,7 @@ function displayMusic(music){
         '                  </form>'+
         '                </div>')}
 
+        // bouton play = joue la musique
     $('.button_music').click(function (event) {
         $('#footer').html("")
         let id_music = $(event.target).closest('.button_music').attr('id');
@@ -445,16 +476,26 @@ function displayMusic(music){
         }
     })
 
-        $('.button_add').click(function (event){
-            let id_music=$(event.target).closest('.button_add').attr('id');
-            $('#body').html("")
-            $('#body').append('<input id="id_music" type="text" style="display: none;" value="'+id_music+'">')
-            ajaxRequest('GET','../class/request.php/playlist/'+id,displayAddPlaylist);
-        })
+    $('.button_add').click(function (event){
+        let id_music=$(event.target).closest('.button_add').attr('id');
+        $('#body').html("")
+        $('#body').append('<input id="id_music" type="text" style="display: none;" value="'+id_music+'">')
+        ajaxRequest('GET','../class/request.php/playlist/'+id,displayAddPlaylist);
+    })
+    $('.buttons_artiste').click(function (event){
+        $('#body').html("")
+        let id_artiste=$(event.target).closest('.buttons_artiste').attr('id');
+        console.log(id_artiste)
+        if(id_artiste!==undefined){
+
+            ajaxRequest('GET','../class/request.php/showartiste/'+id_artiste,show_artiste)
+        }
+    })
 
 
 }
 
+// fuinction pour afficher un footer pour jouer la musique
 function music_player(music){
 
     $('#footer').append('<div class="music-player">\n' +
@@ -557,7 +598,6 @@ function play_music(){
         const audioDuration = audioPlayer.duration;
         const seekTime = progressPercentage * audioDuration;
         audioPlayer.currentTime = seekTime; // Déplace la position de lecture de l'audio
-        const totalTimeElement = document.querySelector('#total-time');
     }
 
 // Fonction pour ajuster le volume de l'audio en fonction de la position de la barre de volume
@@ -609,13 +649,13 @@ function play_music(){
 
 
 
-
+//fonction pur afficher toute les playlists
 function displayPlaylist(playlist){
     $('#autoWidth2').html("")
     for(let i=0;i<playlist.length;i++){
         $('#autoWidth2').append(
             '                <div class="item">\n' +
-            '                    <img src="'+playlist[i]['image_playlist']+'" />\n' +
+            '                    <img src="'+playlist[i]['image_playlist']+'" alt="album"/>\n' +
             '                    <h4>'+playlist[i]['nom_playlist']+'</h4>\n' +
             '                    <button class="buttonss" id="'+playlist[i]['id_playlist']+'" style="margin-left: -5px" type="button"><ion-icon name="eye-outline"></ion-icon></button>'+
             '                </div>')}
@@ -631,7 +671,7 @@ function displayPlaylist(playlist){
 }
 
 
-
+// fonction qui affoche tout kes song liker
 function displayLiked(playlist){
     $('#liked_song').html("")
     for(let i=0;i<playlist.length;i++){
@@ -641,6 +681,7 @@ function displayLiked(playlist){
             '                    <span>Liked Songs</span>\n' +
             '                </a>')}
 
+            // si on clique sur le lien on affiche tout les song liker
     $('.show_song_liked').click(function (event) {
         event.preventDefault()
         console.log('aaaaa')
@@ -654,14 +695,14 @@ function displayLiked(playlist){
 }
 
 
-
+// fonction pour afficher le form pour creer une playlist
 function displayAddPlaylist(playlist){
     let playlists=''
     for(let i=0;i<playlist.length;i++) {
         if (playlist[i]['nom_playlist'] !== 'The last 10 listens') {
 
             playlists += '       <div class="item">\n' +
-                '           <img src="' + playlist[i]['image_playlist'] + '">\n' +
+                '           <img src="' + playlist[i]['image_playlist'] + '" alt="playlist">\n' +
                 '           <h4>' + playlist[i]['nom_playlist'] + '</h4>\n' +
                 '       <button class="button_add_music" id="' + playlist[i]['id_playlist'] + '" style="margin-left: -5px" type="button"><ion-icon name="add-circle-outline"></ion-icon></button>\n' +
                 '       </div>'
@@ -696,8 +737,11 @@ function displayAddPlaylist(playlist){
         window.location.href = "../User/user_home.php";
     })
 }
+
+//montrer les musique dans une playlist
 function showMusic_playlist(playlist){
 
+    let content
     $('#body').html("")
     if (playlist ==="false"){
 
@@ -705,9 +749,9 @@ function showMusic_playlist(playlist){
         content='<h2>There is no music in that playlist</h2>'
     }else {
         console.log(playlist)
-        var tableRows = '';
+        let tableRows = '';
 
-        for (var i = 0; i < playlist.length; i++) {
+        for (let i = 0; i < playlist.length; i++) {
             let minutes = Math.floor(playlist[i]['duree'] / 60)
             let seconde = Math.floor(playlist[i]['duree'] % 60)
             // Formatage des minutes et des secondes avec deux chiffres
@@ -734,7 +778,7 @@ function showMusic_playlist(playlist){
         }
 
 
-        var content = '<div class="container">\n' +
+         content = '<div class="container">\n' +
             '    <div class="right">\n' +
             '        <div class="playlist-header">\n' +
             '            <div class="playlist-top">\n' +
@@ -790,6 +834,7 @@ function showMusic_playlist(playlist){
         }
     })
 
+    // pour delete un song
     $('.button_trash').click(function (event){
         let id_trash=$(event.target).closest('.button_trash').attr('id');
         let id_playlist=$('.playlist-title').attr('id')

@@ -110,7 +110,7 @@ $info=Playlist::get_playlist_music(1);
         </div>
     </div>
 
-    <div id='b_playlist' class="spotify-playlists">
+    <div  id='b_playlist' class="spotify-playlists">
         <h2>Playlists</h2>
         <div class="list cs-hidden" id="autoWidth2"></div>
         <div class="button-container">
@@ -118,6 +118,10 @@ $info=Playlist::get_playlist_music(1);
             <a class="next" onclick="scrollToNext3()">&#10095;</a>
         </div>
     </div>
+    <br><br><br><br><br>
+
+
+
     <footer id='footer' class="preview">
     </footer>
 

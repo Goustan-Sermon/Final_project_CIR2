@@ -308,3 +308,8 @@ spotify-playlists .list .item .play .fa2 {
     color:white;
     text-align: center;
 }
+
+.artiste:hover{
+    text-decoration: underline;
+
+}

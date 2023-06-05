@@ -13,6 +13,8 @@
     <link rel="stylesheet" type="text/css" href="../css/carousel.css">
     <link rel="stylesheet" type="text/css" href="../css/playlist.css">
     <link rel="stylesheet" type="text/css" href="../css/audio_player.css">
+    <link rel="website icon" type="png" href="../image/banane.png">
+
     <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"

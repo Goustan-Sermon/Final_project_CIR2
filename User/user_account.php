@@ -26,34 +26,9 @@ $info=User::get_info_client($user_id);
                         <span>Your account</span>
                     </a>
                 </li>
-
-
-                <li>
-                    <a href="#">
-                        <span class="fa fas fa-book"></span>
-                        <span>Your Library</span>
-                    </a>
-                </li>
             </ul>
         </div>
 
-        <div class="navigation">
-            <ul>
-                <li>
-                    <a href="#">
-                        <span class="fa fas fa-plus-square"></span>
-                        <span>Create Playlist</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <span class="fa fas fa-heart"></span>
-                        <span>Liked Songs</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
 
     </div>
     <input id='id_user' type='text' style='display: none;' value=<?php echo $user_id ?>>
