@@ -132,5 +132,5 @@ CREATE TABLE public.Morceau_Artiste(
     ,CONSTRAINT Morceau_Artiste_Morceau0_FK FOREIGN KEY (id_morceau) REFERENCES public.Morceau(id_morceau)
 )WITHOUT OIDS;
 
-DELETE FROM morceau_playlist WHERE id_morceau=:id_music AND id_playlist=:id_playlist
+
 
