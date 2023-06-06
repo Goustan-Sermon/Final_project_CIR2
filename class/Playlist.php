@@ -106,6 +106,9 @@ WHERE p.id_playlist = :idPlaylist;");
 
     static function create_playlist($id,$nom)
     {
+        if($nom==='The last 10 listens') {
+            return false;
+        }
         try {
 
             $dbh=Db::connexionBD();
@@ -124,22 +127,103 @@ WHERE p.id_playlist = :idPlaylist;");
 
     }
 
-    static function history($id,$music)
+    static function history($id)
     {
-
         try {
             $conn = Db::connexionBD();
-            $statement = $conn->prepare('SELECT COUNT(*) FROM playlist WHERE id_user=:id_user AND id_playlist=:id_playlist');
-            $statement->bindParam(':id_music', $music);
-            $statement->bindParam(':id_playlist', $playlist);
+            $statement = $conn->prepare("SELECT
+   mp.id_morceau,
+    p.nom_playlist,
+       p.image_playlist,
+   mp.id_playlist,
+   m.titre_morceau,
+   m.duree,
+   m.extrait,
+   m2.titre_album,
+   m2.date_parution,
+   m2.image_album,
+   a.nom_artiste
+FROM
+    public.Morceau_Playlist mp
+join morceau m on m.id_morceau = mp.id_morceau
+join album m2 on m.id_album = m2.id_album
+join artiste a on m2.id_artiste=a.id_artiste
+join playlist p on mp.id_playlist = p.id_playlist
+WHERE
+        mp.id_playlist = :id_playlist
+ORDER BY mp.CTID DESC LIMIT 10;");
+            $statement->bindParam(':id_playlist', $id);
             $statement->execute();
+            $result=$statement->fetchAll(PDO::FETCH_ASSOC);
+            if (empty($result)) {
+                return "false";
+            }else {
+                return $result;
+            }
         } catch (PDOException $exception) {
             error_log('Request error: ' . $exception->getMessage());
             return false;
         }
-        return true;
+
     }
 
+     static function add_history($id, $music)
+    {
+
+        try {
+            $conn = Db::connexionBD();
+            $statement = $conn->prepare("SELECT id_playlist FROM playlist WHERE id_user=:id_user and nom_playlist='The last 10 listens';");
+            $statement->bindParam(':id_user', $id);
+            $statement->execute();
+            $result= $statement->fetch(PDO::FETCH_ASSOC);
+            $id_playlist=$result['id_playlist'];
+        } catch (PDOException $exception) {
+            error_log('Request error: ' . $exception->getMessage());
+            return false;
+        }
+        try {
+            $dbh=Db::connexionBD();
+                $statement = $dbh->prepare("INSERT INTO morceau_playlist(id_morceau, id_playlist) 
+                                                VALUES (:music,:id_playlist)");
+                $statement->bindParam(":music", $music);
+                $statement->bindParam(":id_playlist", $id_playlist);
+                $statement->execute();
+                return true;
+
+            } catch (PDOException $exception) {
+                error_log('Connection error: '.$exception->getMessage());
+                return false;
+            }
+    }
+
+     static function delete_playlist($id)
+    {
+
+        try{
+            $dbh=Db::connexionBD();
+            $statement = $dbh->prepare("DELETE FROM morceau_playlist WHERE id_playlist=:id_playlist");
+            $statement->bindParam(":id_playlist", $id);
+            $statement->execute();
+        } catch (PDOException $exception) {
+            error_log('Connection error: '.$exception->getMessage());
+            return false;
+        }
+
+        try{
+            $dbh=Db::connexionBD();
+            $statement = $dbh->prepare("DELETE FROM playlist WHERE id_playlist=:id_playlist");
+            $statement->bindParam(":id_playlist", $id);
+            $statement->execute();
+        } catch (PDOException $exception) {
+            error_log('Connection error: '.$exception->getMessage());
+            return false;
+        }
+
+
+        return true;
+
+
+    }
 
 
 }

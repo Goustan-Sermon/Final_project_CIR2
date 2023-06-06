@@ -2,13 +2,14 @@
 ob_start();
 require_once ("../class/User.php");
 require_once ("../class/Playlist.php");
-$user_id=User::Login();
-$info=Playlist::get_playlist_music(1);
 
+$user_id=User::Login();
+$info=User::get_id($user_id);
 
 ?>
 
     <div id="id"><input id='id_user_home' type='text' style='display: none;' value=<?php echo $user_id ?>></div>
+    <div id="id"><input id='tkt' type='text' style='display: none;' value=<?php echo $info ?>></div>
 
 
 <div class="sidebar">

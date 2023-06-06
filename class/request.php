@@ -41,6 +41,8 @@ switch ($requestRessource) {
                     $result = Playlist::add_music($_POST['music'], $_POST['playlist']);
                     break;
                 }
+            case 'DELETE':
+                $result=Playlist::delete_playlist($id);
         }
         break;
     case 'playlist_music':
@@ -68,6 +70,8 @@ switch ($requestRessource) {
             case 'GET':
                 $result = Album::get_album();
                 break;
+            case 'DELETE':
+
         }
         break;
     case 'showmusic':
@@ -121,10 +125,15 @@ switch ($requestRessource) {
         break;
     case 'history':
         switch ($requestMethod){
+            case 'GET':
+                $result=Playlist::history($id);
+                break;
             case 'POST':
-                $result=Playlist::history($id,$_POST['music']);
+                $result=Playlist::add_history($id,$_POST['music']);
+                break;
 
         }
+        break;
 
 }
 

@@ -37,7 +37,7 @@ FROM
         INNER JOIN Morceau_Artiste ON Morceau.id_morceau = Morceau_Artiste.id_morceau
         INNER JOIN Artiste ON Morceau_Artiste.id_artiste = Artiste.id_artiste
         INNER JOIN Album ON Morceau.id_album = Album.id_album
-ORDER BY random();");
+ORDER BY random() LIMIT 200;");
             $statement->execute();
             return $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $exception) {

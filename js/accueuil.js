@@ -1,6 +1,7 @@
 /* On Recupere l'id de la session connecter*/
 
 let id=document.getElementById('id_user_home').value
+let tkt=document.getElementById('tkt').value
 
 /* Requete ajax pour tout l'affichage de la page d'accueil */
 ajaxRequest('GET','../class/request.php/playlist/'+id,displayPlaylist) // les playlist
@@ -164,6 +165,9 @@ function recherche_music(music){
         let id_music=$(event.target).closest('.button_music').attr('id');
         if(id_music!==undefined){
             ajaxRequest('GET','../class/request.php/listenmusic/'+id_music,music_player);
+            ajaxRequest('POST','../class/request.php/history/'+id,()=>{
+                ajaxRequest('GET','../class/request.php/history/'+tkt,displayAlbum)
+            },'music='+id_music)
         }
 
 
@@ -456,6 +460,9 @@ function showMusic(music) {
         console.log(id_music)
         if(id_music!==undefined){
             ajaxRequest('GET','../class/request.php/listenmusic/'+id_music,music_player);
+            ajaxRequest('POST','../class/request.php/history/'+id,()=>{
+                ajaxRequest('GET','../class/request.php/history/'+tkt,displayAlbum)
+            },'music='+id_music)
         }
     })
     $('.button_add').click(function (event){
@@ -502,7 +509,12 @@ function displayMusic(music){
         console.log(id_music)
         if (id_music !== undefined) {
             ajaxRequest('GET', '../class/request.php/listenmusic/' + id_music, music_player);
+            ajaxRequest('POST','../class/request.php/history/'+id,()=>{
+                ajaxRequest('GET','../class/request.php/history/'+tkt,displayAlbum)
+            },'music='+id_music)
+
         }
+
     })
 
     $('.button_add').click(function (event){
@@ -681,13 +693,37 @@ function play_music(){
 //fonction pur afficher toute les playlists
 function displayPlaylist(playlist){
     $('#autoWidth2').html("")
-    for(let i=0;i<playlist.length;i++){
-        $('#autoWidth2').append(
-            '                <div class="item">\n' +
-            '                    <img src="'+playlist[i]['image_playlist']+'" alt="album"/>\n' +
-            '                    <h4>'+playlist[i]['nom_playlist']+'</h4>\n' +
-            '                    <button class="buttonss" id="'+playlist[i]['id_playlist']+'" style="margin-left: -5px" type="button"><ion-icon name="eye-outline"></ion-icon></button>'+
-            '                </div>')}
+    for(let i=0;i<playlist.length;i++) {
+        if (playlist[i]['nom_playlist'] !== 'The last 10 listens' && playlist[i]['nom_playlist']!== 'Liked Titles') {
+            $('#autoWidth2').append(
+                '                <div class="item">\n' +
+                '                    <img src="' + playlist[i]['image_playlist'] + '" alt="album"/>\n' +
+                '                    <h4>' + playlist[i]['nom_playlist'] + '</h4>\n' +
+                '                    <form action="" method="post" style="display: inline-flex;justify-content: space-between;" >   '+
+
+                '             <button style="margin: 10px; width: 40px;" class="buttonss" id="' + playlist[i]['id_playlist'] + '" style="margin-left: -5px" type="button"><ion-icon name="eye-outline"></ion-icon></button>'+
+                                '<button style="margin: 10px; width: 40px;" class="buttonss_trash" id="' + playlist[i]['id_playlist'] + '" style="margin-left: -5px" type="button"><ion-icon name="trash-outline"></ion-icon></button>'+
+                               '</form></div>')
+
+        } else if(playlist[i]['nom_playlist']!== 'Liked Titles'){
+            $('#autoWidth2').append(
+                '                <div class="item">\n' +
+                '                    <img src="' + playlist[i]['image_playlist'] + '" alt="album"/>\n' +
+                '                    <h4>' + playlist[i]['nom_playlist'] + '</h4>\n' +
+
+                '                    <button class="buttonss_10" id="' + playlist[i]['id_playlist'] + '" style="margin-left: -5px" type="button"><ion-icon name="eye-outline"></ion-icon></button>' +
+                '                </div>')
+        }else{
+            $('#autoWidth2').append(
+                '                <div class="item">\n' +
+                '                    <img src="' + playlist[i]['image_playlist'] + '" alt="album"/>\n' +
+                '                    <h4>' + playlist[i]['nom_playlist'] + '</h4>\n' +
+
+                '                    <button class="buttonss" id="' + playlist[i]['id_playlist'] + '" style="margin-left: -5px" type="button"><ion-icon name="eye-outline"></ion-icon></button>' +
+                '                </div>')
+
+        }
+    }
 
     $('.buttonss').click(function (event) {
         $('#body').html("")
@@ -697,6 +733,26 @@ function displayPlaylist(playlist){
             ajaxRequest('GET', '../class/request.php/playlist_music/' + id_playlist, showMusic_playlist)
         }
     })
+
+    $('.buttonss_10').click(function (event){
+        $('#body').html("")
+        let id_playlist = $(event.target).closest('.buttonss_10').attr('id');
+        if (id_playlist !== undefined) {
+            ajaxRequest('GET', '../class/request.php/history/' + id_playlist, showMusic_playlist)
+        }
+
+    })
+
+    $('.buttonss_trash').click(function (event){
+        event.preventDefault()
+        let id_playlist = $(event.target).closest('.buttonss_trash').attr('id');
+
+        ajaxRequest('DELETE','../class/request.php/playlist/'+id_playlist,()=>{
+            ajaxRequest('GET','../class/request.php/playlist/'+id,displayPlaylist)
+        })
+    })
+
+
 }
 
 
@@ -770,7 +826,7 @@ function displayAddPlaylist(playlist){
 //montrer les musique dans une playlist
 function showMusic_playlist(playlist){
 
-    let content
+    let content=''
     $('#body').html("")
     if (playlist ==="false"){
 
@@ -795,21 +851,20 @@ function showMusic_playlist(playlist){
                 '        </div>\n' +
                 '        <div class="song-name-album">\n' +
                 '            <div class="song-name">' + playlist[i].titre_morceau + '</div>\n' +
-                '            <div class="song-artist">' + playlist[i].nom_artiste + '</div>\n' +
+                '            <div class="song-artist">Voir plus</div>\n' +
                 '        </div>\n' +
                 '    </td>\n' +
                 '    <td class="song-album">' + playlist[i].titre_album + '</td>\n' +
                 '    <td class="song-date-added">' + playlist[i].date_parution + '</td>\n' +
-                '    <td class="song-duration">' + date + '</td>\n' +
-                '    <td class="play_music"><button class="button_music" id="' + playlist[i]['id_morceau'] + '" style="margin-left: -5px" type="button" value=""><ion-icon name="play-outline"></ion-icon></td>'
-                        if(playlist[i].nom_playlist!=='The last 10 listens') {
-                            tableRows+='<td class="play_music"><button class="button_trash" id="' + playlist[i]['id_morceau'] + '" style="margin-left: -5px" type="button" value=""><ion-icon name="heart-dislike-outline"></ion-icon></td>' +
-
-                '</tr>\n';}
+                '    <td class="song-duration">' + date + '</td>\n'
+            if(playlist[i].nom_playlist!=='The last 10 listens') {
+                tableRows+=' <td class="play_music"><button class="button_music" id="' + playlist[i]['id_morceau'] + '" style="margin-left: -5px" type="button" value=""><ion-icon name="play-outline"></ion-icon></td><td class="play_music"><button class="button_trash" id="' + playlist[i]['id_morceau'] + '" style="margin-left: -5px" type="button" value=""><ion-icon name="heart-dislike-outline"></ion-icon></td>'
+           }
         }
+        tableRows+='</tr>';
 
 
-         content = '<div class="container">\n' +
+         content += '<div class="container">\n' +
             '    <div class="right">\n' +
             '        <div class="playlist-header">\n' +
             '            <div class="playlist-top">\n' +
@@ -837,6 +892,7 @@ function showMusic_playlist(playlist){
             '                            <div style="width: 150%;"><ion-icon name="time-outline"></ion-icon></div>\n' +
             '                        </th>\n' +
             '                        <th>\n' +
+
             '                            <div style="width: 150%;"><ion-icon name="musical-notes-outline"></ion-icon></div>\n' +
             '                        </th>\n' +
             '                        <th>\n' +
@@ -860,6 +916,9 @@ function showMusic_playlist(playlist){
         console.log(id_music)
         if(id_music!==undefined){
             ajaxRequest('GET','../class/request.php/listenmusic/'+id_music,music_player);
+            ajaxRequest('POST','../class/request.php/history/'+id,()=>{
+                ajaxRequest('GET','../class/request.php/history/'+tkt,displayAlbum)
+            },'music='+id_music)
 
 
         }

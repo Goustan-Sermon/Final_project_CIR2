@@ -167,6 +167,20 @@ class User
         }
     }
 
+    static function get_id($id){
+        try {
+            $conn = Db::connexionBD();
+            $statement = $conn->prepare("SELECT id_playlist FROM playlist WHERE id_user=:id_user and nom_playlist='The last 10 listens';");
+            $statement->bindParam(':id_user', $id);
+            $statement->execute();
+            $result= $statement->fetch(PDO::FETCH_ASSOC);
+            $id_playlist=$result['id_playlist'];
+            return $id_playlist;
+        } catch (PDOException $exception) {
+            error_log('Request error: ' . $exception->getMessage());
+            return false;
+        }
+    }
     /*
      * Update les infos du user
      */
