@@ -5,7 +5,7 @@ $user_id=User::Login();
 
 ?>
     <video autoplay loop muted id="video-bg">
-        <source src="../image/vecteezy_abstract-interface-hud-wave-motion-music-equalizer-sound-frequency-in-a-cool-multi-colors-circle_2015666.mp4" type="video/mp4">
+        <source src="../image/BG.mp4" type="video/mp4">
 
         Your browser does not support the video tag.
     </video>
