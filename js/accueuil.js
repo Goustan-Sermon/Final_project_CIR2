@@ -201,7 +201,7 @@ function recherche_artiste(music){
 
     if (music==="false"){
         $('#search_result').html("")
-        $('#search_result').append('<h2>There is no artiste for "'+search+'"</h2>')
+        $('#search_result').append('<h2>There is no artist for "'+search+'"</h2>')
         return
     }
     for (let i=0;i<music.length;i++){
