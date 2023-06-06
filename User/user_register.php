@@ -3,7 +3,11 @@ ob_start();
 require_once ("../class/User.php");
 $error=User::register();
 ?>
+    <video autoplay loop muted id="video-bg">
+        <source src="../image/BG.mp4" type="video/mp4">
 
+        Your browser does not support the video tag.
+    </video>
     <section class="section">
         <div class="container py-5 h-100 ">
             <div class="row justify-content-center align-items-center h-100 ">
@@ -42,7 +46,7 @@ $error=User::register();
                                     <div class="col-md-6 mb-1 pb-2">
                                         <div class="input-box" style="width: 210px;">
                                             <input style='color:white;' type="date" name="Age" id="Age" value="<?php echo $_POST['Age']; ?>">
-                                            <label class="form-label" for="Age">Date de naissance</label>
+                                            <label class="form-label" for="Age">Birth Date</label>
                                         </div>
                                     </div>
                                 </div>

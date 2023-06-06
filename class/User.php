@@ -113,7 +113,7 @@ class User
                 $statement = $dbh->prepare("INSERT INTO public.Utilisateur(nom, prenom, email, mdp,date_naissance,photo_profile) 
                                                 VALUES (:nom, :prenom, :email, :mdp,:age,'../image/default_profil.png')");
 
-                //crypte les mdp
+
                 $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
                 $statement->bindParam(":nom", $_POST['lastName']);
                 $statement->bindParam(":prenom", $_POST['firstName']);

@@ -106,6 +106,8 @@ WHERE p.id_playlist = :idPlaylist;");
 
     static function create_playlist($id,$nom)
     {
+
+        $nom = htmlentities($nom);
         if($nom==='The last 10 listens' || $nom==='Liked Titles') {
             return false;
         }

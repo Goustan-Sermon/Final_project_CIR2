@@ -8,6 +8,8 @@
     <!-- Title -->
     <title>Banana'Zik</title>
 
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-4.4.1.css">
+
     <link rel="stylesheet" type="text/css" href="../css/client.css">
     <link rel="website icon" type="png" href="../image/banane.png">
 
