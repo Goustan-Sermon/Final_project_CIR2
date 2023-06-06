@@ -22,7 +22,7 @@ $('#create_playlist').click(function(){
         '                   <div class="item">\n' +
         '                    <img src="../image/banane.png" alt="banane"/>\n' +
         '                    <label for="nom_playlist"><h3 style="color: white">New playlist</h3></label><br>\n' +
-        '                    <input type="text" id="nom_playlist" name="nom" required ><br><br>\n' +
+        '                    <input style="width:100%;" type="text" id="nom_playlist" name="nom" required ><br><br>\n' +
         '                    <div style="display: inline-flex;justify-content: space-between;" >   '+
         '                   <button style="margin: 10px;width: 40px;" class="button_music" id="create" style="margin-left: -5px" type="button" value="">New</button>'+
         '                  </div> </div></div></div>')

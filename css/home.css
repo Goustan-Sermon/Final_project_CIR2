@@ -217,7 +217,7 @@ body {
 .preview {
     position: fixed;
     bottom: 0;
-    left: 230px;
+    left: 177px;
     right: 0;
     padding: 0.05rem 1rem;
     background: -webkit-linear-gradient(90deg, #050505,#2b2b2c,#050505);
@@ -290,7 +290,7 @@ body {
 
 #Select {
     position: absolute;
-    top: 6px;
+    top: 4px;
     right: 50px;
     width: 20%;
     height: 75%;
