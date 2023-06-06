@@ -70,6 +70,7 @@ $info=User::get_id($user_id);
                         <option value="Artist">Artist</option>
                         <option value="Music">Music</option>
                         <option value="Style">Style</option>
+                        <option value="Annee">Year</option>
                     </select>
                 </label>
                 </form>

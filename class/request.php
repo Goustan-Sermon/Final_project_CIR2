@@ -116,6 +116,13 @@ switch ($requestRessource) {
                 break;
         }
         break;
+    case 'filtrer_annee':
+        switch ($requestMethod) {
+            case 'GET':
+                $result = Album::date_filter($_GET['search']);
+                break;
+        }
+        break;
     case 'listenmusic':
         switch ($requestMethod) {
             case 'GET':
