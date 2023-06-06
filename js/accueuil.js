@@ -576,6 +576,7 @@ function play_music(){
     let progressBarUpdateInterval;
     function demarrerLectureAvecDelai() {
         setTimeout(function() {
+            audioPlayer.pause()
             audioPlayer.play();
         }, 1000); // Délai en millisecondes (1000 ms = 1 seconde)
     }demarrerLectureAvecDelai()
