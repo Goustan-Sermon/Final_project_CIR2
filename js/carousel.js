@@ -45,3 +45,19 @@ function scrollToPrev3() {
         behavior: 'smooth'
     });
 }
+
+function scrollToNext4() {
+    var container = document.getElementById("autoWidth3");
+    container.scrollBy({
+        left: 400,
+        behavior: 'smooth'
+    });
+}
+
+function scrollToPrev4() {
+    var container = document.getElementById("autoWidth3");
+    container.scrollBy({
+        left: -400,
+        behavior: 'smooth'
+    });
+}

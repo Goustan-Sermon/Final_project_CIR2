@@ -97,6 +97,10 @@ function recherche_music(music){
     $('#autoWidth3').html("")
     $('#search_result').html("")
     $('#search_result').append('<h2>Search for "'+search+'" in '+select+'</h2>')
+    $('#search_scroll').html("")
+    $('#search_scroll').append(
+        '                    <a class="prev" onclick="scrollToPrev4()">&#10094;</a>' +
+        '                    <a class="next" onclick="scrollToNext4()">&#10095;</a>')
 
     if (music==="false"){
         $('#search_result').html("")
@@ -115,10 +119,7 @@ function recherche_music(music){
             '                   <button  style="margin: 10px;width: 40px;" class="button_add" style="margin-left: -5px" type="button" value=""><ion-icon name="add-circle-outline"></ion-icon>' + '</button>'+
             '                  </div>'+'                </div>')
     }
-    $('#autoWidth3').append('<div class="button-container">\n' +
-        '            <a class="prev" onclick="scrollToPrev()">&#10094;</a>\n' +
-        '            <a class="next" onclick="scrollToNext()">&#10095;</a>\n' +
-        '        </div>')
+
 
     // Si on clique sur le bouton play on peux jouer la musique
     $('.button_music').click(function (event){
@@ -148,12 +149,17 @@ function recherche_album(music){
     $('#autoWidth3').html("")
     $('#search_result').html("")
     $('#search_result').append('<h2>Search for "'+search+'" in '+select+'</h2>')
+    $('#search_scroll').html("")
+    $('#search_scroll').append(
+        '                    <a class="prev" onclick="scrollToPrev4()">&#10094;</a>' +
+        '                    <a class="next" onclick="scrollToNext4()">&#10095;</a>')
 
     if (music==="false"){
         $('#search_result').html("")
         $('#search_result').append('<h2>There is no '+select+' for "'+search+'"</h2>')
         return
     }
+
     for (let i=0;i<music.length;i++){
         $('#autoWidth3').append(
             '            </div><div class="item">\n' +
@@ -162,10 +168,7 @@ function recherche_album(music){
             '                   <button class="buttons" id="'+music[i]['id_album']+'" style="margin-left: -5px" type="button" value=""><ion-icon name="eye-outline"></ion-icon></button>'+
             '                </div>')
     }
-    $('#autoWidth3').append('<div class="button-container">\n' +
-        '            <a class="prev" onclick="scrollToPrev()">&#10094;</a>\n' +
-        '            <a class="next" onclick="scrollToNext()">&#10095;</a>\n' +
-        '        </div>')
+
 
     // SI on appuie sur le bouton view (l'oeil) on montre le detail de l'album (artiste song duree etc..)
     $('.buttons').click(function (event){
@@ -191,6 +194,10 @@ function recherche_artiste(music){
     $('#autoWidth3').html("")
     $('#search_result').html("")
     $('#search_result').append('<h2>Search for "'+search+'" in '+select+'</h2>')
+    $('#search_scroll').html("")
+    $('#search_scroll').append(
+        '                    <a class="prev" onclick="scrollToPrev4()">&#10094;</a>' +
+        '                    <a class="next" onclick="scrollToNext4()">&#10095;</a>')
 
     if (music==="false"){
         $('#search_result').html("")
@@ -205,10 +212,7 @@ function recherche_artiste(music){
             '                   <button class="buttons_artiste" id="'+music[i]['id_artiste']+'" style="margin-left: -5px" type="button" value=""><ion-icon name="eye-outline"></ion-icon></button>'+
             '                </div>')
     }
-    $('#autoWidth3').append('<div class="button-container">\n' +
-        '            <a class="prev" onclick="scrollToPrev()">&#10094;</a>\n' +
-        '            <a class="next" onclick="scrollToNext()">&#10095;</a>\n' +
-        '        </div>')
+
 
     // SI on clique sur l'oeil on azffiche les info de l'artiste et tout ses album
     $('.buttons_artiste').click(function (event){
@@ -246,16 +250,16 @@ function show_artiste(album){
         '            </div>\n' +
         '        </div>' +
         '<div class="main-container" id="body"> <div class="banana-playlist">\n' +
-
-        '        <div class="list cs-hidden" >\n' +
-        '            <div id="scrollable-content">\n' +
-        '                <form action="user_home.php" method="get" id="autoWidth"></form>\n' +
-        '            </div>\n' +
-        '        </div>\n' +
         '        <div class="button-container">\n' +
         '            <a class="prev" onclick="scrollToPrev()">&#10094;</a>\n' +
         '            <a class="next" onclick="scrollToNext()">&#10095;</a>\n' +
         '        </div>\n' +
+
+        '            <div id="scrollable-content">\n' +
+        '                <form class="list cs-hidden" action="user_home.php" method="get" id="autoWidth"></form>\n' +
+        '            </div>\n' +
+
+
         '    </div>' +
         '</div>'
     document.getElementById("body").innerHTML = content;
@@ -555,6 +559,7 @@ function play_music(){
     const audioPlayer = document.querySelector('#music-player');
     const currentTimeElement = document.querySelector('#current-time');
     const totalTimeElement = document.querySelector('#total-time');
+    const replay = document.querySelector('.fa-undo-alt');
 
     totalTimeElement.innerHTML=(formatTime(audioPlayer.duration))
 
@@ -565,6 +570,7 @@ function play_music(){
     volumeBar.addEventListener('click', adjustVolume);
     audioPlayer.addEventListener('timeupdate', updateProgressBar);
     audioPlayer.addEventListener('volumechange', updateVolumeProgress);
+    replay.addEventListener('click',Replaymusic)
 
 // Variable pour stocker l'intervalle de mise à jour de la barre de progression
     let progressBarUpdateInterval;
@@ -575,6 +581,13 @@ function play_music(){
     }demarrerLectureAvecDelai()
 
 // Fonction pour basculer entre lecture et pause
+
+    function Replaymusic(){
+        audioPlayer.currentTime=0;
+        setTimeout(function(){
+            audioPlayer.play();
+        },3000)
+    }
     function togglePlayPause() {
         if (playPauseButton.classList.contains('fa-pause')) {
             playPauseButton.classList.remove('fa-pause');
@@ -813,7 +826,6 @@ function showMusic_playlist(playlist){
                 '        </div>\n' +
                 '        <div class="song-name-album">\n' +
                 '            <div class="song-name">' + playlist[i].titre_morceau + '</div>\n' +
-                '            <div class="song-artist">Voir plus</div>\n' +
                 '        </div>\n' +
                 '    </td>\n' +
                 '    <td class="song-album">' + playlist[i].titre_album + '</td>\n' +
@@ -836,9 +848,14 @@ function showMusic_playlist(playlist){
             '                    <img src="' + playlist[0].image_playlist + '" alt="">\n' +
             '                </div>\n' +
             '                <div class="playlist-info">\n' +
-            '                    <div class="playlist-public"> PLAYLIST</div>\n' +
-            '                    <div class="playlist-title" id="'+playlist[0].id_playlist+'">' + playlist[0].nom_playlist + '</div>\n' +
-            '                    <div style="height: 10px;"></div>\n' +
+            '                    <div class="playlist-public"> PLAYLIST</div>\n'+
+          '                    <div class="playlist-title" id="'+playlist[0].id_playlist+'">' + playlist[0].nom_playlist + '</div>\n'
+
+                                if(playlist[0].nom_playlist==='The last 10 listens') {
+                                     content += '<div class="playlist-public" id="Voir"> See more</div>\n'+
+                                      '<div class="playlist-public" id="delete_history"> Clear history</div>\n'
+                                 }
+            content+='                    <div style="height: 10px;"></div>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '        </div>\n' +
@@ -898,6 +915,21 @@ function showMusic_playlist(playlist){
 
         }
     })
+
+    $('#Voir').click(function (){
+
+        ajaxRequest('GET','../class/request.php/history_more/'+tkt,showMusic_playlist)
+    })
+
+    $('#delete_history').click(function (){
+        window.location.href="user_home.php"
+        ajaxRequest('DELETE','../class/request.php/history?id_history='+tkt,()=>{
+            ajaxRequest('GET','../class/request.php/history/'+tkt,showMusic_playlist)
+
+
+        })
+        })
+
 
 
 }

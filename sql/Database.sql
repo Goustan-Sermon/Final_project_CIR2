@@ -133,6 +133,13 @@ CREATE TABLE public.Morceau_Artiste(
 )WITHOUT OIDS;
 
 
-DELETE FROM morceau_playlist WHERE id_playlist=:id_playlist
-DELETE FROM playlist WHERE id_playlist=:idplylist;
+SELECT a.titre_album, a.date_parution, a.image_album, a.id_album, ar.nom_artiste
+FROM public.album a
+         JOIN public.artiste ar ON a.id_artiste = ar.id_artiste
+WHERE EXTRACT(YEAR FROM a.date_parution) = :search;
 
+SELECT EXTRACT(YEAR FROM a.date_parution) AS colonne_string
+FROM album a;
+
+
+DELETE FROM playlist WHERE id_playlist=8

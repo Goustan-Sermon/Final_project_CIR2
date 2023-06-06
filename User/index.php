@@ -4,6 +4,11 @@ require_once ("../class/User.php");
 $user_id=User::Login();
 
 ?>
+    <video autoplay loop muted id="video-bg">
+        <source src="../image/vecteezy_abstract-interface-hud-wave-motion-music-equalizer-sound-frequency-in-a-cool-multi-colors-circle_2015666.mp4" type="video/mp4">
+
+        Your browser does not support the video tag.
+    </video>
 
     <section class="section">
         <div class="form-box">
@@ -12,7 +17,7 @@ $user_id=User::Login();
                     <h2>Login</h2>
                     <div class="input-box">
                         <ion-icon name="mail-outline"></ion-icon>
-                        <input type="email" required name="email" id="email" autocomplete="off" <?php echo isset($_POST['email']) ? $_POST['email'] : ''; ?>">
+                        <input type="email" required name="email" id="email" autocomplete="off">
                         <label for="email">Email</label>
                     </div>
                     <div class="input-box">
@@ -21,18 +26,17 @@ $user_id=User::Login();
                         <label for="password">Password</label>
                     </div>
 
-                    <?php
-                    echo "<div class='alert'>".$user_id."</div>";
-                    ?>
+                    <div class="alert"><?php echo $user_id; ?></div>
 
                     <button type="submit">Log in</button>
                     <div class="register">
-                        <p>Don't have account ? <a href="user_register.php">Register</a></p>
+                        <p>Don't have an account? <a href="user_register.php">Register</a></p>
                     </div>
                 </form>
             </div>
         </div>
     </section>
+
 
 <?php
 $content_login = ob_get_clean();

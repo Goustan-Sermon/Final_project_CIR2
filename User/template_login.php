@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title>Banane Music</title>
+    <title>Banana'Zik</title>
 
     <link rel="stylesheet" type="text/css" href="../css/client.css">
+    <link rel="website icon" type="png" href="../image/banane.png">
+
 
     <script src="../js/jquery3.4.1.js" defer></script>
 </head>

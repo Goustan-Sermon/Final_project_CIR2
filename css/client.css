@@ -1,24 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&family=Poppins:wght@200&display=swap');
-*{
-
+* {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins',sans-serif;
-
-
+    box-sizing: border-box;
+    font-family: "Poppins",sans-serif;
 }
 
-.section{
+body {
+    overflow-x: hidden;
+}
 
+#video-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.section {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    width: 100%;
-    background: url('../image/login_backgd.png') no-repeat center;
-    background-size: cover;
-
+    color: #fff;
 }
+
+
+
 
 .form-box{
 
@@ -29,6 +40,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 10;
 
 }
 

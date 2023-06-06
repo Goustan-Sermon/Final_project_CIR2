@@ -55,6 +55,7 @@ switch ($requestRessource) {
                 break;
             case'POST':
                 $result=Playlist::create_playlist($id,$_POST['nom']);
+                break;
         }
         break;
     case 'music':
@@ -138,7 +139,18 @@ switch ($requestRessource) {
             case 'POST':
                 $result=Playlist::add_history($id,$_POST['music']);
                 break;
+            case 'DELETE':
+                $result=Playlist::delete_history($_GET['id_history']);
+                break;
 
+        }
+        break;
+
+    case 'history_more':
+        switch ($requestMethod){
+            case 'GET':
+                $result=Playlist::more_history($id);
+                break;
         }
         break;
 

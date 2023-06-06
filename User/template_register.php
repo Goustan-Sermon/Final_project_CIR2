@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title>Banane Music</title>
+    <title>Banana'Zik</title>
 
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap-4.4.1.css">
     <link rel="stylesheet" type="text/css" href="../css/client.css">
+    <link rel="website icon" type="png" href="../image/banane.png">
 
 
 

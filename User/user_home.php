@@ -87,11 +87,13 @@ $info=User::get_id($user_id);
         </div>
     </div>
 
-    <div class="banana-playlist">
+    <div class="banana-playlist" >
         <div id="search_result"></div>
         <div class="list cs-hidden" id="autoWidth3">
-
         </div>
+    <div id="search_scroll">
+        <div class="button-container"></div>
+    </div>
 
     </div>
 
