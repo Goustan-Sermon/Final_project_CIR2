@@ -1,3 +1,4 @@
+// FIchier pour le carousel des page pour defiler les musique et les playlists
 function scrollToNext() {
     var container = document.getElementById("autoWidth");
     container.scrollBy({

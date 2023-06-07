@@ -1,19 +1,22 @@
-
+//recuperation des id
 let id_user=document.getElementById('id_user').value
 let form=document.getElementById('profil-form')
-ajaxRequest('GET','../class/request.php/user/'+id_user,display_user)
+ajaxRequest('GET','../class/request.php/user/'+id_user,display_user) // requete ajax pour pour afficher les info du user
 
 
+// SI on clique sur send on affiche le form de modification d'info
 function afficher_form(){
 
     form.style.display='inline-block'
 }
 
+// SI cancel on affiche plus le form
 function cacher_form(){
 
     form.style.display='none';
 }
 
+// function pour afficher les informations du user
 function display_user(info){
 
     console.log(info)
@@ -32,7 +35,7 @@ function display_user(info){
         '                <button type="button" value="'+info['id_user']+'" id="modifier" class="contact-btn" onclick="afficher_form()">Modify</button>\n' +
         '            </div>\n' +
         '        </div>')
-
+// Quand on clique sur modifer on lance la requete ajax de modifcation puis de reaffichage des infos
     $("#new_data").click(function (event){
         let id=$(event.target).attr('value')
         console.log(id)

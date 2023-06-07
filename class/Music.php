@@ -3,6 +3,7 @@ require_once ('Database.php');
 class Music
 {
 
+    //Recupere tout les info d'une music en fonction de son id morceau
      static function get_music_by_id($id)
     {
         try {
@@ -21,6 +22,7 @@ WHERE m.id_morceau =:id_music;");
         }
     }
 
+    // Recupere toute les musics
     function get_music(){
 
         try {
@@ -37,7 +39,7 @@ FROM
         INNER JOIN Morceau_Artiste ON Morceau.id_morceau = Morceau_Artiste.id_morceau
         INNER JOIN Artiste ON Morceau_Artiste.id_artiste = Artiste.id_artiste
         INNER JOIN Album ON Morceau.id_album = Album.id_album
-ORDER BY random() LIMIT 200;");
+ORDER BY random() LIMIT 100;");
             $statement->execute();
             return $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $exception) {
@@ -45,6 +47,7 @@ ORDER BY random() LIMIT 200;");
             return false;
         }
     }
+    // Recherche d'une music ne fonction d'une recherche
     static function music_filter($search){
         try {
             $dbh = Db::connexionBD();
@@ -65,6 +68,8 @@ ORDER BY random() LIMIT 200;");
         }
         return $result;
     }
+
+    // Recher tout les album en fonction d'un style rechercher
     static function style_filter($search){
         try {
             $dbh = Db::connexionBD();

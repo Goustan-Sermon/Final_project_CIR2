@@ -8,6 +8,7 @@ class User
 {
 
 
+    // Pour loger un user
     static function Login()
     {
 
@@ -21,10 +22,12 @@ class User
             return $_SESSION['id_user'];
         }
 
-        if (!isset($_SESSION['id_user']) && $fileName != 'index.php') {    //deco
+        // SI la session n'est pas creer et que le user ne se trouve pas sur la page de login on le redirige vers le login , fonctionne pour la deco
+        if (!isset($_SESSION['id_user']) && $fileName != 'index.php') {
             header('Location: ../User/index.php');
         }
 
+        // Si les post ne sont pas vide on recupere les info pour le couple email mdp
         if (!empty($_POST['email']) && !empty($_POST['password'])) {
             try {
                 $dbh = Db::connexionBD();
@@ -39,6 +42,7 @@ class User
                 return false;
             }
 
+            // Si le resultat du haut n'est pas vide on verifie que le mdp est bien le bon
             if (!empty($result) && password_verify($_POST['password'], $result['mdp'])) {
                 $_SESSION['id_user'] = $result['id_user'];
                 header('Location: ../User/user_home.php');
@@ -46,6 +50,7 @@ class User
             else{
                 return "Password or email incorrect !";
             }
+            // Si tout est ok on lui creer une session avec son id
             return $_SESSION['id_user'];
         }
         return false;

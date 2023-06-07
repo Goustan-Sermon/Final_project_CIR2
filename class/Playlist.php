@@ -5,6 +5,7 @@ require_once ('Database.php');
 class Playlist
 {
 
+    // Recuperation de tout les playlist d'un user
     static function get_playlist($id)
     {
 
@@ -41,6 +42,7 @@ GROUP BY
 
     }
 
+    // recuperation de toutes les musiques d'une playlist d'un user
     public static function get_playlist_music($id)
     {
         try {
@@ -70,6 +72,7 @@ WHERE p.id_playlist = :idPlaylist;");
 
     }
 
+    // Ajoute une musique dans une playlist
     static function add_music($id,$playlist)
     {
         try {
@@ -88,6 +91,7 @@ WHERE p.id_playlist = :idPlaylist;");
             return false;
 }
 
+// Supprimer une musique d'une playlist
     static function delete_music($music, $playlist)
     {
 
@@ -104,6 +108,7 @@ WHERE p.id_playlist = :idPlaylist;");
         return true;
     }
 
+    // Creer une playlist pour un user
     static function create_playlist($id,$nom)
     {
 
@@ -129,6 +134,7 @@ WHERE p.id_playlist = :idPlaylist;");
 
     }
 
+    // Affiche 10 son de la playlist historique d'un user
     static function history($id)
     {
         try {
@@ -169,6 +175,7 @@ ORDER BY mp.CTID DESC LIMIT 10;");
 
     }
 
+    // Ajout d'une musique a la playlist historique
      static function add_history($id, $music)
     {
 
@@ -198,9 +205,11 @@ ORDER BY mp.CTID DESC LIMIT 10;");
             }
     }
 
+    // Delete uen playlist
      static function delete_playlist($id)
     {
 
+        // SI celle-ci est pas vide on la playlist
         try{
             $dbh=Db::connexionBD();
             $statement = $dbh->prepare("DELETE FROM morceau_playlist WHERE id_playlist=:id_playlist");
@@ -211,6 +220,7 @@ ORDER BY mp.CTID DESC LIMIT 10;");
             return false;
         }
 
+        // et ensuite on detruit la playlist
         try{
             $dbh=Db::connexionBD();
             $statement = $dbh->prepare("DELETE FROM playlist WHERE id_playlist=:id_playlist");
@@ -227,6 +237,7 @@ ORDER BY mp.CTID DESC LIMIT 10;");
 
     }
 
+    // Affiche 20 sons dans l'historique
     public static function more_history($id)
     {
             try {
@@ -268,6 +279,7 @@ ORDER BY mp.CTID DESC LIMIT 20;");
 
         }
 
+        // Clear l'historique d'un user
     public static function delete_history($id)
     {
         try{

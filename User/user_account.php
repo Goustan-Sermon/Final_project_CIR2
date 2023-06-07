@@ -58,7 +58,7 @@ $info=User::get_info_client($user_id);
                 <div class="card-footer">
 
 
-                    <button onclick="cacher_form()" class="contact-btn" id='new_data' type="button" value=<?php echo $user_id?>>Envoyer</button>
+                    <button onclick="cacher_form()" class="contact-btn" id='new_data' type="button" value=<?php echo $user_id?>>Send</button>
                     <button  type="button" value="Cancel" class="contact-btn" onclick="cacher_form()">Cancel</button>
 
                 </div>

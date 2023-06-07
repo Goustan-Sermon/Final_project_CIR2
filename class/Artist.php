@@ -2,6 +2,8 @@
 
 class Artist
 {
+
+    // Recher les artiste en fonction d'une recherche
     static function artist_filter($search){
 
         try {
@@ -27,6 +29,7 @@ class Artist
 
     }
 
+    // Recherche tout les albums d'un artiste
     static function get_album_by_artist($id_artiste){
         try {
             $dbh = Db::connexionBD();

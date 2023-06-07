@@ -4,6 +4,7 @@ require_once ('Database.php');
 class Album
 {
 
+    // Pur obtenir toute les music d'un album
     static function get_music_by_album($id_playlist){
         try {
             $dbh = Db::connexionBD();
@@ -23,6 +24,8 @@ WHERE al.id_album = :id_album;
             return false;
         }
     }
+
+    // POur avpoir tout les album
     static function get_album(){
 
         try {
@@ -39,6 +42,8 @@ GROUP BY Album.id_album, Album.titre_album, Artiste.nom_artiste,artiste.id_artis
             return false;
         }
     }
+
+    // Pour avoir tout les album en fonction du recherche
     static function album_filter($search){
         try {
             $dbh = Db::connexionBD();
@@ -61,6 +66,8 @@ GROUP BY Album.id_album, Album.titre_album, Artiste.nom_artiste,artiste.id_artis
         }
         return $result;
     }
+
+    // Recherche d'album en fonction d'une date
     static function date_filter($search){
         try {
             $dbh = Db::connexionBD();
